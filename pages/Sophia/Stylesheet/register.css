@@ -51,6 +51,19 @@ form{
     flex-direction: column;
     row-gap: 10px;
     align-items: center;
+    height: 350px;
+    overflow-y: scroll;
+    padding-right: 5px;
+}
+.form-wrapper::-webkit-scrollbar{
+   width: 8px;
+   background-color: rgb(238, 238, 238);
+    border-radius: 25px;
+}
+
+.form-wrapper::-webkit-scrollbar-thumb{
+    background-color: rgba(154, 154, 154, 0.768);
+    border-radius: 25px;
 }
 .input-wrapper{
     display: flex;
