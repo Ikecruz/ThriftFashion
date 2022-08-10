@@ -1,29 +1,34 @@
-from flask import redirect, request, render_template
-from flask import session
+from flask import redirect, request, render_template, session, jsonify
 from services.auth_services import emailExists, register_logic, usernameExists
 
 def index():
     return redirect('/')
     
 def register():
-    error = ""
-    if request.method == "POST" and 'submit' in request.form:
+    msg = ""
+    if request.method == "GET":
+        return render_template('register.html')
+
+    if request.method == "POST":
 
         body = request.form.get
 
-
         if (body('email') == "" or body('name') == "" or body('password') == "" or body('username') == "" ):
-            error = "All fields are required"
+            msg = "All fields are required"
 
         elif (emailExists(body('email'))):
-            error = "Email already registered"
+            msg = "Email already registered"
 
         elif (usernameExists(body('username'))):
-            error = "Username already in use"
+            msg = "Username already in use"
 
         else:
             if(register_logic(body)) :
                 session['email'] = body('email')
-                return redirect("/auth/verify")
+                return jsonify({ 'status': "success" })
 
-    return render_template('register.html', error)
+    return jsonify({ 'status': "error", 'message': msg })
+
+def verify():
+    if request.method == "GET":
+        return render_template('verify.html')

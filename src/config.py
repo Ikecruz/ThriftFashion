@@ -6,7 +6,7 @@ SECRET_KEY = os.urandom(32)
 # Grabs the folder where the script runs.
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-# Enable debug mode, that will refresh the page when you make changes.
+# Enable debug mode, that will refresh the page when changes are made
 DEBUG = True
 
 # Connect to the MYSQL database
