@@ -29,7 +29,14 @@
                     </div>
                     <div class="quantity-wrap">
                         <div class="quantity">
-                            <p>1 <span class="line"></span> Pcs &nbsp;<i class="bi bi-caret-down-fill"></i> </p>
+                            <p>
+                                <span id="item-quantity">0</span> 
+                                <span class="line"></span> Pcs &nbsp;
+                                <span class="count">
+                                    <i class="bi bi-caret-up-fill" id="increase" onclick="increase()" ></i>
+                                    <i class="bi bi-caret-down-fill" onclick="decrease()" id="decrease"></i>
+                                </span> 
+                            </p>
                         </div>
                         <button><i class="bi bi-plus"></i> Add to Cart</button>
                     </div>
@@ -48,12 +55,31 @@
 
 
     <script>
-        // function enlarge(){
-        //     document.querySelector("#product-image").style.height = "450px"
-        // }
-        // function reduce(){
-        //     document.querySelector("#product-image").style.height = "400px"
-        // }
+        let itemQuantity = 0
+        let count = document.querySelector("#item-quantity")
+        function increase(){
+            itemQuantity += 1
+            document.querySelector("#item-quantity").innerHTML = itemQuantity
+            if(count.innerHTML > 0){
+                document.querySelector("#decrease").style.display = "block"
+                document.querySelector("#increase").style.top = "3px"
+
+            }
+        }
+        
+        function decrease(){
+            if(count.innerHTML > 0){
+                itemQuantity -= 1
+            }
+            if(count.innerHTML == 0){
+                itemQuantity = 0
+            }
+            document.querySelector("#item-quantity").innerHTML = itemQuantity
+            if(count.innerHTML <= 0){
+                document.querySelector("#decrease").style.display = "none"
+            }
+
+        }
     </script>
 </body>
 </html>

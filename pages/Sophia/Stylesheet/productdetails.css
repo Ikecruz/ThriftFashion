@@ -104,6 +104,32 @@ body{
     border-radius: 25px;
     font-weight: 400;
 }
+.quantity .count{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.count .bi{
+    font-size: 12px;
+    padding: 0px 3px;
+}
+.count .bi:hover{
+    cursor: pointer;
+    background-color: rgb(202, 202, 202);
+}
+.bi-caret-up-fill{
+    position: relative;
+    top: 0px;
+}
+.bi-caret-down-fill{
+    position: relative;
+    bottom: 3px;
+    display: none;
+}
+/* .decrease .bi-caret-down-fill{
+    display: block;
+} */
 .quantity p{
     display: flex;
     align-items: center;
