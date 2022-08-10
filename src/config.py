@@ -14,3 +14,15 @@ SQLALCHEMY_DATABASE_URI = 'mysql://root:@localhost/ThriftFashion'
 
 # Turn off the Flask-SQLAlchemy event system and warning
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+MAIL_SERVER = "mail.diagnosisabc.com"
+
+MAIL_PORT = 587
+
+MAIL_USERNAME = "admin@diagnosisabc.com"
+
+MAIL_PASSWORD = "admin"
+
+MAIL_USE_TLS = False
+
+MAIL_USE_SSL = True
