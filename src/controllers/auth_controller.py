@@ -11,7 +11,7 @@ def register():
 
         body = request.form.get
 
-        if (body('email') == "" or body('name') == "" or body('password') == "" or body('username') == "" ):
+        if (body('email') is None or body('name') is None or body('password') is None or body('username') is None):
             msg = "All fields are required"
             return jsonify({ 'status': "error", 'message': msg })
 

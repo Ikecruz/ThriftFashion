@@ -30,5 +30,5 @@ def register_admin(body):
         print(e)
         return False
 def admin_login (body):
-    user = Admin.query.filter_by(username=body('username')).first()
-    return sha256_crypt.verify(user.password,body ('password'))
+    admin = Admin.query.filter_by(username=body('username')).first()
+    return sha256_crypt.verify(body('password'), admin.password)

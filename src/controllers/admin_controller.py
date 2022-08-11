@@ -9,7 +9,7 @@ def index():
 def register():
     if request.method == "POST":
         body = request.form.get
-        if (body('username') == "" or body('email') == "" or body('password') == ""):
+        if (body('username') is None or body('email') is None or body('password') is None):
             msg = "All fields are required"
         elif usernameExists(body('username')):
             msg = "Username already exist"
@@ -25,7 +25,7 @@ def register():
 def login():
     if request.method == "POST":
         body = request.form.get
-        if (body('username') == "" or body('password') == ""):
+        if (body('username')is None or body('password') is None):
             msg = "All fields are required"
         else:
             if admin_login(body):

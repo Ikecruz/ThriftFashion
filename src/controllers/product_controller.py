@@ -7,14 +7,15 @@ from flask import jsonify, redirect, request, session, url_for
 
 
 def index():
-    return ""
+  if request.method == "POST":
+    return redirect ("/")
 
 
 def addProduct():
     if request.method == "POST":
         body = request.form.get
         f = request.files.get
-        if (body("name") == "" or body("price") == "" or body("qty") == "" or body("category") == "" or f('image') == None):
+        if (body("name") is None or body("price") is None or body("qty") is None or body("category") is None or f('image') == None):
             msg = "Fill All fields"
         if 'admin' not in session:
                 return redirect('/admin/login')
@@ -24,7 +25,7 @@ def addProduct():
             msg = "Category Does Not Exist"
         else:
             imgname = upload_file(f("image"))
-            if imgname == "":
+            if imgname is None:
                 msg = 'Error uploading file'
             elif add_product(body, imgname):
                 return jsonify({'status': "error"})
@@ -36,7 +37,7 @@ def addProduct():
 def addCategory():
     if request.method == "POST":
         body = request.form.get
-        if (body("name") == ""):
+        if (body("name") is None):
             msg = "Fill All fields"
         if 'admin' not in session:
             return redirect('/admin/login')
@@ -51,7 +52,7 @@ def addCategory():
 def updateStock ():
     if request.method == "POST":
         body = request.form.get
-        if (body("name") == "" or body ("qty")==""):
+        if (body("name") is None or body ("qty")is None):
             msg = "Fill All fields"
         if 'admin' not in session:
             return redirect('/admin/login')
