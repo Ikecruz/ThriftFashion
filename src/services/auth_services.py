@@ -17,6 +17,7 @@ def genToken():
     ran = ''.join(random.choices(string.digits, k = S))    
     return str(ran)
 
+
 def emailExists(user_email):
     """
     If the user_email exists in the database, return True, otherwise return False
@@ -42,6 +43,7 @@ def usernameExists(user_name):
         return False
     return True
 
+
 def verify_logic(user_email,tk):
     """
     If the user exists and the token matches, then update the user's email_verified field to True
@@ -62,7 +64,8 @@ def verify_logic(user_email,tk):
     except Exception as e:
         print(e)
         return False
-    
+
+
 def register_logic(body):
     """
     It takes a body object, generates a token, creates a user object, inserts the user object into the
@@ -72,6 +75,7 @@ def register_logic(body):
     :return: A boolean value
     """
     generatedToken = genToken()
+    print(body)
 
     user = User(
         name=body('name'), 
@@ -91,7 +95,15 @@ def register_logic(body):
         print(e)
         return False
 
+
 def resendToken(user_email):
+    """
+    It takes a user's email address, generates a token, updates the user's token in the database, and
+    sends an email to the user with the token.
+    
+    :param user_email: The email address of the user who's token you want to resend
+    :return: A boolean value
+    """
     generatedToken = genToken()
 
     user = User.query.filter_by(email=user_email).first()
@@ -109,3 +121,20 @@ def resendToken(user_email):
         print(e)
         return False
 
+
+def login_logic(body):
+    """
+    It checks if the user exists in the database and if the password is valid.
+    
+    :param body: The request body
+    :return: True or False
+    """
+    user = User.query.filter_by(email=body('email')).first()
+
+    if user is None:
+        return False
+    
+    passvalid = sha256_crypt.verify(body('password'), user.password)
+
+    if passvalid:
+        return True

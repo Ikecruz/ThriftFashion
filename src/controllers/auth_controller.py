@@ -1,5 +1,5 @@
 from flask import redirect, request, render_template, session, jsonify
-from services.auth_services import emailExists, register_logic, resendToken, usernameExists, verify_logic
+from services.auth_services import emailExists, login_logic, register_logic, resendToken, usernameExists, verify_logic
 
 def index():
     return redirect('/')
@@ -11,7 +11,7 @@ def register():
 
         body = request.form.get
 
-        if (body('email') == "" or body('name') == "" or body('password') == "" or body('username') == "" ):
+        if (body('email') is None or body('name') is None or body('password') is None or body('username') is None ):
             msg = "All fields are required"
             return jsonify({ 'status': "error", 'message': msg })
 
@@ -37,7 +37,7 @@ def verify():
         if request.method == "POST":
             body = request.form.get
 
-            if (body('vcode') == ""):
+            if (body('vcode') is None):
                 msg = "All fields are required"
                 jsonify({'status': "success", 'message': msg})
 
@@ -60,3 +60,25 @@ def resendOTP():
             return jsonify({ 'status': "success"})
 
     return jsonify({ 'status': "error" })
+
+def login():
+
+    msg = ""
+
+    if (request.method == "POST"):
+        body = request.form.get
+
+        if (body('email') is None or body('password') is None ):
+            msg = "All fields are required"
+            return jsonify({ 'status': "error", 'message': msg })
+        
+        if (login_logic(body)):
+            session['user_email'] = body('email')
+            return jsonify({'status': "success"})
+        else:
+            msg = "Login details are incorrect"
+            return jsonify({ 'status': "error", 'message': msg })
+
+    print(session)
+    
+    return render_template('login.html')
