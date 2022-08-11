@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
 }
-.container{
+.mycontainer{
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -61,7 +61,7 @@
 form{
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 10px;
 }
 .form-wrapper{
     display: flex;
@@ -120,10 +120,6 @@ form button:hover{
     color: white;
     transition: 500ms;
 }
-
-
-
-
 
 
 
@@ -187,4 +183,19 @@ form button:hover{
     .wrapper{
         padding: 50px 20px;
     }
+}
+
+.resend_p_tag{
+    text-align: center;
+}
+
+.resend_p_tag >span.underline{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.redirect_url{
+    text-decoration: underline;
+    font-size: 1em;
+    color: gray;
 }
