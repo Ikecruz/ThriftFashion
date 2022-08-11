@@ -3,7 +3,7 @@ from flask_mail import  Message
 def sendEmail(header, reciever, body):
     from app import mail
     
-    msg = Message(header, sender="dracoglocky@gmail.com", recipients=[reciever])
+    msg = Message(header, sender="admin@diagnosisabc.com", recipients=[reciever])
     msg.body = body
     try:
         mail.send(msg)
