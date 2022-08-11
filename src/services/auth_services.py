@@ -25,22 +25,6 @@ def usernameExists(user_name):
     return True
 
 
-def tokenExists(tk):
-    token = User.query.filter_by(token=tk).first()
-    if (token is None):
-            return False
-    return True
-
-def verify_logic(tk):
-    try:
-        user = User.query.filter_by(token=tk).first()
-        user.email_verified=True
-        db.session.flush()
-        db.session.commit()
-        return True
-    except Exception as e:
-        print(e)
-        return False
 def register_logic(body):
     generatedToken = genToken()
 

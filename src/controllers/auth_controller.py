@@ -32,17 +32,3 @@ def register():
 def verify():
     if request.method == "GET":
         return render_template('verify.html')
-    if request.method == "POST":
-       body = request.form.get
-
-       if (body('vcode') == ""):
-           msg = "All fields are required"
-       elif (tokenExists(body('vcode'))):
-           if verify_logic(body('vcode')):
-                 return jsonify({ 'status': "success", 'message': "verified" })
-           else:
-               return jsonify({'status': "success", 'message': "false"})
-       else:
-             msg = "no"
-
-    return jsonify({ 'status': "error", 'message': msg })
