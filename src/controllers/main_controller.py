@@ -1,4 +1,4 @@
-from flask import redirect, url_for
+from flask import render_template, url_for
 
 def index():
-    return "Home Page"
+    return render_template("index.html")
