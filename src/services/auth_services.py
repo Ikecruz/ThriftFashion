@@ -4,7 +4,6 @@ from flask import session
 from flask_sqlalchemy import (SessionBase)
 
 from passlib.hash import sha256_crypt
-from database.db import db
 from models.user_model import User
 from services.email_services import sendEmail
 
