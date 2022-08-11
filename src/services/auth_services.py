@@ -1,9 +1,6 @@
-
-from flask import session
-from flask_sqlalchemy import (SessionBase)
-
+import random
+import string
 from passlib.hash import sha256_crypt
-from database.db import db
 from models.user_model import User
 from services.email_services import sendEmail
 
@@ -23,6 +20,7 @@ def usernameExists(user_name):
     if (userName is None):
         return False
     return True
+
 
 
 def register_logic(body):

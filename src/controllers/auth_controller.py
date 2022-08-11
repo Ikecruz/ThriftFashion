@@ -1,6 +1,5 @@
 from flask import redirect, request, render_template, session, jsonify
-from services.auth_services import emailExists, register_logic, tokenExists, usernameExists, verify_logic
-
+from services.auth_services import emailExists, register_logic,  usernameExists
 def index():
     return redirect('/')
     
