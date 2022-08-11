@@ -165,7 +165,7 @@ body {
   font-weight: 400;
 }
 
-.container {
+.dashboard_container {
   width: 100%;
   background-color: white;
   min-height: 100vh;
@@ -195,12 +195,12 @@ body {
   font-weight: 600;
 }
 
-.content {
+.dashbord_content {
   padding: 0px 30px;
   color: rgb(84, 84, 84);
-  padding-top: 30px;
+  padding-top: 30px !important;
 }
-.content .page-header {
+.dashbord_content .page-header {
   margin-bottom: 20px;
   font-weight: 500;
 }
@@ -214,12 +214,10 @@ body {
 }
 
 .overview {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: row;
   gap: 20px;
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .overview-card {
@@ -279,7 +277,7 @@ body {
   color: white;
 }
 .income-statistics .income .income-card:nth-child(2) {
-  background: linear-gradient(-45deg, #5555FF, #9787FF);
+  background: linear-gradient(-45deg, #5555ff, #9787ff);
   color: white;
 }
 
@@ -307,11 +305,13 @@ body {
   padding: 20px;
   margin-top: 20px;
   border-radius: 5px;
+  overflow: auto;
 }
 .recent-users table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  background-color: white;
 }
 .recent-users table thead tr {
   border-bottom: 1px solid gainsboro;
@@ -391,6 +391,7 @@ body {
   padding: 20px;
   margin-top: 20px;
   border-radius: 5px;
+  overflow: auto;
 }
 .products-table .product-filter {
   display: flex;
@@ -748,5 +749,97 @@ body {
   }
   .sidebar-container menu ul li a h4 {
     font-size: 12px;
+  }
+  .dashbord_content {
+    padding: 0px 20px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .App {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .sidebar-container {
+    position: static;
+    min-width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    height: 50px;
+    overflow: visible;
+    z-index: 10;
+  }
+  .sidebar-container .logo {
+    display: none;
+  }
+  .sidebar-container menu {
+    height: 100%;
+    width: 300px;
+    padding-top: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #2d67e4;
+    transform: translateX(-100%);
+  }
+  .sidebar-container menu ul li a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+  }
+  .sidebar-container menu ul li a h4 {
+    font-size: 14px;
+  }
+  .dashbord_content {
+    padding: 0px 20px;
+  }
+  .overview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .overview .overview-card:nth-child(3) {
+    grid-column: 1/span 2;
+  }
+  .income-statistics {
+    width: 100%;
+    gap: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+  }
+  .income-statistics .income {
+    width: 100%;
+    flex-direction: row;
+  }
+  .income-statistics .chart {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 530px) {
+  .dashbord_content {
+    padding: 0px 10px;
+  }
+  .overview {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .overview .overview-card:nth-child(3) {
+    grid-column: 1/span 1;
+  }
+  .overview .overview-card {
+    font-size: 14px;
+  }
+  .overview .overview-card .icon i {
+    font-size: 30px;
+  }
+  .overview .overview-card h1 {
+    font-size: 30px;
+  }
+  .income-statistics .income {
+    flex-direction: column;
   }
 }/*# sourceMappingURL=styles.css.map */

@@ -31,8 +31,6 @@ body {
   @include flexDisplay(flex-start, flex-start, row);
 }
 
-
-
 .sidebar-container {
   min-width: 250px;
   max-width: 250px;
@@ -84,7 +82,7 @@ body {
   }
 }
 
-.container {
+.dashboard_container {
   width: 100%;
   background-color: white;
   min-height: 100vh;
@@ -111,10 +109,10 @@ body {
   }
 }
 
-.content {
+.dashbord_content {
   padding: 0px 30px;
   color: rgb(84, 84, 84);
-  padding-top: 30px;
+  padding-top: 30px !important;
 
   .page-header {
     margin-bottom: 20px;
@@ -127,9 +125,10 @@ body {
   gap: 30px;
 }
 .overview {
-  @include flexDisplay(flex-start, flex-start, row);
   gap: 20px;
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 .overview-card {
   background-color: white;
@@ -141,15 +140,6 @@ body {
   border-radius: 5px;
   font-size: 16px;
   @include flexDisplay(center, center, column);
-  // &:nth-child(1){
-  //   background-color: #F7CAFF;
-  // }
-  // &:nth-child(2){
-  //   background-color: #CEF0FF;
-  // }
-  // &:nth-child(3){
-  //   background-color: #FCC2D6;
-  // }
   .icon {
     i {
       font-size: 40px;
@@ -185,10 +175,10 @@ body {
         background: linear-gradient(90deg, royalblue, skyblue);
         color: white;
       }
-      &:nth-child(2) {    
-        background: linear-gradient(-45deg, #5555FF, #9787FF);
+      &:nth-child(2) {
+        background: linear-gradient(-45deg, #5555ff, #9787ff);
 
-    // background: linear-gradient(-45deg, #5555FF, #9787FF, #FF55B8, #FF8787);
+        // background: linear-gradient(-45deg, #5555FF, #9787FF, #FF55B8, #FF8787);
 
         color: white;
       }
@@ -217,11 +207,12 @@ body {
   padding: 20px;
   margin-top: 20px;
   border-radius: 5px;
+  overflow: auto;
   table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-
+    background-color: white;
     thead {
       tr {
         border-bottom: 1px solid gainsboro;
@@ -305,6 +296,8 @@ body {
   padding: 20px;
   margin-top: 20px;
   border-radius: 5px;
+  overflow: auto;
+
   .product-filter {
     @include flexDisplay(space-between, center, row);
     input {
@@ -540,23 +533,22 @@ body {
     h5 {
       margin-bottom: 20px;
     }
-   
   }
   form {
     width: 450px;
-    &.form-details{
+    &.form-details {
       width: 100%;
-      button{
+      button {
         margin-top: 20px;
         width: max-content;
       }
     }
-    .form-grid{
+    .form-grid {
       display: grid;
-      grid-template-columns: repeat(3,1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       margin-top: 30px;
-      .form-content{
+      .form-content {
         margin: 0;
       }
     }
@@ -603,18 +595,18 @@ body {
       margin: 0;
       margin-bottom: 5px;
     }
-    ul{
+    ul {
       padding: 0;
       margin-top: 20px;
-      li{
+      li {
         @include flexDisplay(space-between, center, row);
         padding: 5px;
         margin: 0;
         border-bottom: 1px solid gainsboro;
-        &:nth-child(1){
+        &:nth-child(1) {
           border-top: 1px solid gainsboro;
         }
-        h6{
+        h6 {
           color: black;
         }
       }
@@ -627,7 +619,7 @@ body {
       border-radius: 5px;
       margin: 0;
       font-size: 14px;
-      &:nth-child(2){
+      &:nth-child(2) {
         background-color: #2d67e4;
       }
     }
@@ -638,21 +630,118 @@ body {
 }
 
 @media screen and (max-width: 1250px) {
-    .sidebar-container{
-      min-width: 100px;
-      max-width: 100px;
-      overflow: hidden;
-      menu{
-        ul{
-          li{
-            a{
-              @include flexDisplay(center, center, column);
-              h4{
-                font-size: 12px;
-              }
+  .sidebar-container {
+    min-width: 100px;
+    max-width: 100px;
+    overflow: hidden;
+    menu {
+      ul {
+        li {
+          a {
+            @include flexDisplay(center, center, column);
+            h4 {
+              font-size: 12px;
             }
           }
         }
       }
     }
+  }
+  .dashbord_content {
+    padding: 0px 20px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .App {
+    @include flexDisplay(flex-start, flex-start, column);
+  }
+
+  .sidebar-container {
+    position: static;
+    min-width: 100%;
+    max-width: 100%;
+    @include flexDisplay(space-between, center, row);
+    height: 50px;
+    overflow: visible;
+    z-index: 10;
+    .logo {
+      display: none;
+    }
+    menu {
+      height: 100%;
+      width: 300px;
+      padding-top: 50px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #2d67e4;
+      transform: translateX(-100%);
+
+      ul {
+        li {
+          a {
+            @include flexDisplay(flex-start, center, row);
+            h4 {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .dashbord_content {
+    padding: 0px 20px;
+  }
+  .overview {
+    grid-template-columns: repeat(2, 1fr);
+    .overview-card {
+      &:nth-child(3) {
+        grid-column: 1 / span 2;
+      }
+    }
+  }
+  .income-statistics {
+    width: 100%;
+    gap: 20px;
+    @include flexDisplay(flex-start, flex-start, column-reverse);
+    .income {
+      width: 100%;
+      flex-direction: row;
+    }
+    .chart {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .dashbord_content {
+    padding: 0px 10px;
+  }
+  .overview{
+    grid-template-columns: repeat(1, 1fr);
+    .overview-card {
+      &:nth-child(3) {
+        grid-column: 1 / span 1;
+      }
+    }
+    .overview-card {
+      font-size: 14px;
+      .icon {
+        i {
+          font-size: 30px;
+        }
+      }
+      h1 {
+        font-size: 30px;
+      }
+    }
+  }
+  .income-statistics {
+    .income {
+      flex-direction: column;
+    }
+
+  }
 }
