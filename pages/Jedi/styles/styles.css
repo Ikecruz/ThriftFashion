@@ -732,4 +732,12 @@ body {
 }
 .user-container .account-nav {
   margin-top: 30px;
+}
+
+@media screen and (max-width: 1250px) {
+  .sidebar-container {
+    min-width: 100px;
+    max-width: 100px;
+    overflow: hidden;
+  }
 }/*# sourceMappingURL=styles.css.map */
