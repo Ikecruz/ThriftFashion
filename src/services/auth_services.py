@@ -1,5 +1,6 @@
-import random
-import string
+
+from flask import session
+from flask_sqlalchemy import (SessionBase)
 
 from passlib.hash import sha256_crypt
 from database.db import db
@@ -40,6 +41,7 @@ def usernameExists(user_name):
         return False
     return True
 
+<<<<<<< HEAD
 def verify_logic(user_email,tk):
     user = User.query.filter_by(email=user_email).first()
 
@@ -49,11 +51,29 @@ def verify_logic(user_email,tk):
     try:
         user.email_verified=True
         User.update(user)
+=======
+
+def tokenExists(tk):
+    token = User.query.filter_by(token=tk).first()
+    if (token is None):
+            return False
+    return True
+
+def verify_logic(tk):
+    try:
+        user = User.query.filter_by(token=tk).first()
+        user.email_verified=True
+        db.session.flush()
+        db.session.commit()
+>>>>>>> 0e26689ab0cb7c5996b0e0f33dfca85c291defa7
         return True
     except Exception as e:
         print(e)
         return False
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0e26689ab0cb7c5996b0e0f33dfca85c291defa7
 def register_logic(body):
     """
     It takes a body object, generates a token, creates a user object, inserts the user object into the

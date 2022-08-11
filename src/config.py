@@ -22,6 +22,7 @@ MAIL_SERVER = "mail.diagnosisabc.com"
 MAIL_PORT = 587
 
 MAIL_USERNAME = "admin@diagnosisabc.com"
+TESTING = False
 
 MAIL_PASSWORD = "admin"
 
