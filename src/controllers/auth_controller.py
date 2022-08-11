@@ -82,3 +82,8 @@ def login():
     print(session)
     
     return render_template('login.html')
+
+def forgot_password():
+
+
+    return render_template('forgotpassword.html')
