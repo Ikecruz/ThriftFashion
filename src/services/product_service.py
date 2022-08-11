@@ -42,7 +42,7 @@ def add_product(body,img):
         category=body('category'),
         img_url=img,
         price=body('price'),
-        qty=body('qty')
+        qty=int(body('qty'))
     )
     try:
         Product.insert(product)

@@ -17,8 +17,8 @@ def addProduct():
         f = request.files.get
         if (body("name") is None or body("price") is None or body("qty") is None or body("category") is None or f('image') == None):
             msg = "Fill All fields"
-        if 'admin' not in session:
-                return redirect('/admin/login')
+        # elif 'admin' not in session:
+        #         return redirect('/admin/login')
         elif productExists(body("name")):
             msg = "Product Name is in use"
         elif categoryExists(body("category")) == False:
@@ -28,7 +28,7 @@ def addProduct():
             if imgname is None:
                 msg = 'Error uploading file'
             elif add_product(body, imgname):
-                return jsonify({'status': "error"})
+                return jsonify({'status': "success"})
             else:
                 return jsonify({'status': "error"})
     return jsonify({'status': "error", 'message': msg})
@@ -39,8 +39,8 @@ def addCategory():
         body = request.form.get
         if (body("name") is None):
             msg = "Fill All fields"
-        if 'admin' not in session:
-            return redirect('/admin/login')
+        # elif 'admin' not in session:
+        #     return redirect('/admin/login')
         elif categoryExists(body("category")):
             msg = "Category Already  Exist"
         else:

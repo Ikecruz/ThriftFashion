@@ -25,7 +25,7 @@ def upload_file(image):
         newimgname = f"{getDate()}{genRandomStr()}.png"
         image.filename = newimgname
         filename = secure_filename(image.filename)  
-        image.save(os.path.join('static/products', filename))
+        image.save(os.path.join('static/products/', filename))
         return filename
 
 
