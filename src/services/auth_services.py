@@ -114,7 +114,7 @@ def resendToken(user_email):
     try:
         user.token = generatedToken
         User.update(user)
-        msgBody = f"Hello {user.username}, In order to complete your registration you'll need to verify your email address. Your token is {generatedToken}"
+        msgBody = f"Hello {user.username}, Your OTP token is {generatedToken}"
         sendEmail("Verification Token", user_email, msgBody)
         return True
     except Exception as e:
@@ -138,3 +138,18 @@ def login_logic(body):
 
     if passvalid:
         return True
+
+def changepassword_logic(user_email, user_password):
+    user = User.query.filter_by(email=user_email).first()
+
+    if user is None:
+        return False
+    
+    user.password = sha256_crypt.hash(user_password)
+
+    try:
+        User.update(user)
+        return True
+    except Exception as e:
+        print(e)
+        return False
