@@ -642,5 +642,17 @@ body {
       min-width: 100px;
       max-width: 100px;
       overflow: hidden;
+      menu{
+        ul{
+          li{
+            a{
+              @include flexDisplay(center, center, column);
+              h4{
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
     }
 }

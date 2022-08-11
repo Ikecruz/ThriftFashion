@@ -1,0 +1,51 @@
+@media screen and (min-width: 1250px) {
+  .overview {
+    .container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .ads {
+    img {
+      width: 500px;
+    }
+  }
+}
+
+@media screen and (max-width: 592px) {
+  .overview {
+    .container {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .ads {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .ads {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+}
+@media screen and (max-width: 517px) {
+  .ads {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+}
+@media screen and (max-width: 375px) {
+  .ads {
+    h1 {
+      font-size: 0.9375rem;
+      font-weight: 500;
+    }
+  }
+}

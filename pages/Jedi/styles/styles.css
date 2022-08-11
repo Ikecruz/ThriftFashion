@@ -740,4 +740,13 @@ body {
     max-width: 100px;
     overflow: hidden;
   }
+  .sidebar-container menu ul li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .sidebar-container menu ul li a h4 {
+    font-size: 12px;
+  }
 }/*# sourceMappingURL=styles.css.map */
