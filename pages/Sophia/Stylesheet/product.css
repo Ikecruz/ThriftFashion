@@ -19,6 +19,7 @@ body{
     display: flex;
     justify-content: center;
     overflow-y: scroll;
+    background-color: white;
 }
 .left-container::-webkit-scrollbar{
     width: 5px;
@@ -138,8 +139,87 @@ body{
 
 
 
-
-
 .right-container{
-    width: 70%;
+    width: 80%;
 }
+
+
+
+
+@media(max-width: 1000px){
+    .left-container{
+        width: 25%;
+    }
+    .right-container{
+        width: 75%;
+    }
+}
+@media(max-width:750px){
+    /* .left-container{
+        width: 20%;
+    }
+    .right-container{
+        width: 80%;
+    } */
+    .category-wrapper h2{
+        font-size: 22px;
+    }
+    .categories{
+        padding: 0 20px ;
+    }
+    .categories p{
+        font-size: 15px;
+    }
+    .filter-wrapper h2{
+        font-size: 22px;
+    }
+    .sections h2{
+        font-size: 20px;
+    }
+    .checked-menu input{
+        height: 15px;
+        width: 15px;
+    }
+    .checked-menu p{
+        font-size: 15px;
+    }
+}
+@media(max-width: 550px){
+    .left-container{
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+    }
+    .wrapper{
+        width: 90%;
+    }
+    .category-wrapper h2{
+        font-size: 22px;
+    }
+    .categories{
+        padding: 0 30px ;
+    }
+    .categories p{
+        font-size: 16px;
+    }
+    .filter-wrapper h2{
+        font-size: 22px;
+    }
+    .sections h2{
+        font-size: 20px;
+    }
+    .checked-menu input{
+        height: 17px;
+        width: 17px;
+    }
+    .checked-menu p{
+        font-size: 16px;
+    }
+}
+@media(max-width: 350px){
+    .categories{
+        padding: 0px 20px;
+    }
+}
+
+
