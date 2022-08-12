@@ -14,32 +14,32 @@
     <div class="App">
         <div class="sidebar-container">
             <div class="logo">
-                <a href="index.html">
+                <a href="/admin">
                     <img src="../../img/default.png" alt="" />
                   </a>      
                 </div>
       
                   <menu>
                 <ul>
-                    <li><a href="index.html">
+                    <li><a href="/admin">
                         <i class="material-symbols-outlined">
                             home_app_logo
                             </i>
                             <h4>Dashboard</h4>
                         </a></li>
                         <li>
-                            <a href="orders.html">
+                            <a href="orders">
                               <i class="material-symbols-outlined"> shopping_cart </i>
                               <h4>Orders</h4>
                             </a>
                           </li>
-                    <li><a href="products.html">
+                    <li><a href="products">
                         <i class="material-symbols-outlined">
                             styler
                             </i>
                             <h4>Products</h4>
                         </a></li>
-                    <li><a href="users.html" class="active">
+                    <li><a href="users" class="active">
                         <i class="material-symbols-outlined">
                             group
                             </i>
@@ -48,7 +48,7 @@
                 </ul>
                 <ul>
                     <!-- power_settings_new -->
-                    <li><a href="settings.html">
+                    <li><a href="settings">
                         <i class="material-symbols-outlined">
                             settings
                             </i>
@@ -93,15 +93,55 @@
                     <div class="account-nav">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link " aria-current="page" href="./user.html">Transactions</a>
+                                <a class="nav-link active" aria-current="page" href="#">Transactions</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Reports</a>
+                                <a class="nav-link" href="./report">Reports</a>
                             </li>
                         </ul>
                     </div>
                     <div class="account-content">
-                       
+                        <div class="products-table">
+                           
+                          <table>
+                              <thead>
+                                  <tr>
+                                      <th>Products</th>
+                                      <th>Ammount</th>
+                                      <th>Qty</th>
+                                      <th>Status</th>
+                                      <th>Time</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          <div class="product-item">
+                                          <img src="../../img/raquel-gambin-kS3YkVtf85U-unsplash.jpg" alt="">
+                                         <div>
+                                            <a href="product">Night gown</a>
+                                            <h6> ₦10,000</h6>
+                                         </div>
+                                      </div>
+                                      </td>
+                                      <td>
+                                        ₦30,000
+                                      </td>
+                                      <td>
+                                        3
+                                      </td>
+                                      <td>
+                                       <span class="status-icon pending">Pending</span>
+                                      </td>
+                                      
+                                      <td>_ _</td>
+                                      
+                                  </tr>
+                                
+                              </tbody>
+                          </table>
+                          
+                      </div>
                     </div>
                 </div>
             </div>

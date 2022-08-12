@@ -1,2 +1,7 @@
 from database.db import db
-db.create_all()
+def run():
+    db.create_all()
+
+
+if __name__ == "__main__":
+    run()
