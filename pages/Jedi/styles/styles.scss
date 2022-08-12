@@ -27,6 +27,12 @@ body {
   height: 100%;
 }
 
+.form-error{
+  color: crimson;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
 .App {
   @include flexDisplay(flex-start, flex-start, row);
 }
@@ -38,8 +44,19 @@ body {
   position: sticky;
   top: 0;
   background-color: #2d67e4;
+ .top-nav-content{
+  margin: 0;
+  padding: 0;
+  @include flexDisplay(center, center, row);
+  .burger{
+    color: white;
+    font-size: 40px;
+    display: none;
+  }
+ }
   .logo {
     padding: 0px 30px;
+    width: 150px;
     a {
       font-size: 25px;
       color: white;
@@ -321,7 +338,7 @@ body {
 
     td,
     th {
-      text-align: center;
+      text-align: center !important;
       padding: 10px;
     }
 
@@ -464,6 +481,10 @@ body {
       z-index: 2;
     }
   }
+}
+
+.product-nav{
+  margin-bottom: 30px !important; 
 }
 .product {
   @include flexDisplay(flex-start, flex-start, row);
@@ -669,21 +690,39 @@ body {
     min-width: 100%;
     max-width: 100%;
     @include flexDisplay(space-between, center, row);
-    height: 50px;
-    overflow: visible;
+    height: 60px;
     z-index: 10;
+    &.showBar{
+      overflow: visible;
+      menu{
+        transform: translateX(0%) !important; 
+      }
+    }
+    .top-nav-content{
+      z-index: 300;
+      .burger{
+        color: white;
+        font-size: 40px;
+        display: block;
+      }
+    }
     .logo {
-      display: none;
+      overflow: hidden;
+      a{
+        img{
+          width: 80px;
+        }
+      }
     }
     menu {
-      height: 100%;
       width: 300px;
-      padding-top: 50px;
+      padding-top: 100px;
       position: fixed;
+      height: 100vh;
       top: 0;
       left: 0;
       background-color: #2d67e4;
-      transform: translateX(-100%);
+       transform: translateX(-100%);
 
       ul {
         li {
