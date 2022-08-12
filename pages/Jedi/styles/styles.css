@@ -509,7 +509,8 @@ body {
   margin: 0 !important;
 }
 .upload-product-form .input-fields .form-content input,
-.upload-product-form .input-fields .form-content textarea {
+.upload-product-form .input-fields .form-content textarea,
+.upload-product-form .input-fields .form-content select {
   border: 1px solid gainsboro;
   width: 100%;
   min-width: 0;
@@ -587,6 +588,9 @@ body {
   -o-object-fit: cover;
      object-fit: cover;
 }
+.product .product-descriptions {
+  width: 70%;
+}
 .product .product-descriptions .product-content {
   margin-bottom: 20px;
 }
@@ -596,9 +600,10 @@ body {
   margin: 0 !important;
 }
 .product .product-descriptions .product-content input,
-.product .product-descriptions .product-content textarea {
+.product .product-descriptions .product-content textarea,
+.product .product-descriptions .product-content select {
   border: 1px solid gainsboro;
-  width: 400px;
+  width: 100%;
   max-width: 400px;
   padding: 6px;
   font-size: 16px;
@@ -609,6 +614,7 @@ body {
   max-height: 150px;
 }
 .product .product-descriptions .product-content .form-btn {
+  max-width: 400px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -827,6 +833,15 @@ body {
   .upload-product-form .upload-img-container {
     height: 300px;
   }
+  .product .product-img {
+    height: 300px;
+  }
+  .settings form {
+    width: 450px;
+  }
+  .settings form .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 @media screen and (max-width: 771px) {
   .upload-product-form {
@@ -839,7 +854,27 @@ body {
   .upload-product-form .input-fields {
     width: 100%;
   }
-  .upload-product-form .input-fields input, .upload-product-form .input-fields textarea, .upload-product-form .input-fields button {
+  .upload-product-form .input-fields input,
+.upload-product-form .input-fields textarea,
+.upload-product-form .input-fields button {
+    max-width: 100% !important;
+  }
+  .product {
+    flex-direction: column;
+    padding: 0px 10%;
+  }
+  .product .product-img {
+    margin: auto;
+    height: 400px;
+    min-width: 0;
+  }
+  .product .product-descriptions {
+    width: 100%;
+  }
+  .product .product-descriptions input,
+.product .product-descriptions select,
+.product .product-descriptions textarea,
+.product .product-descriptions .form-btn {
     max-width: 100% !important;
   }
 }
@@ -865,4 +900,26 @@ body {
   .income-statistics .income {
     flex-direction: column;
   }
-}
+  .product {
+    flex-direction: column;
+    padding: 0px 10%;
+  }
+  .product .product-img {
+    width: 100%;
+  }
+  .product .product-descriptions {
+    width: 100%;
+  }
+  .product .product-descriptions input,
+.product .product-descriptions select,
+.product .product-descriptions textarea,
+.product .product-descriptions .form-btn {
+    max-width: 100% !important;
+  }
+  .settings form {
+    width: 100%;
+  }
+  .settings form .form-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}/*# sourceMappingURL=styles.css.map */
