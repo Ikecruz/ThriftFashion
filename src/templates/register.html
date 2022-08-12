@@ -22,9 +22,8 @@
                 <h2>Sign Up</h2>
                 <p>Already have an account? <span><a href="/auth/login">Log In</a></span></p>
             </div>
-            <div class="alert alert-danger alert-dismissible fade show w-100" role="alert" id="info_box">
-                <strong>Holy guacamole!</strong> <span></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert alert-danger fade show w-100" role="alert" id="info_box">
+                <span></span>
             </div>
             <form id="register_form">
                 <div class="form-wrapper">
@@ -134,9 +133,6 @@
             form.on("submit", (e) => {
                 e.preventDefault()
 
-                $("#submit_btn").attr("disabled", true)
-                $("#submit_btn").text("Loading...")
-
                 if (validate()){
                     $.ajax({
                         type: "POST",
@@ -157,9 +153,6 @@
                         }
                     }).fail( (e) => console.log(e) )
                 }
-
-                $("#submit_btn").removeAttr("disabled")
-                $("#submit_btn").text("Sign Up")
 
             })
         })

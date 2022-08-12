@@ -20,9 +20,8 @@
                 <h1>Welcome back</h1>
                 <p>Don't have an account <span><a href="/auth/register">Click here</a></span></p>
             </div>
-            <div class="alert alert-dismissible fade show w-100 mb-1" role="alert" id="info_box">
-                <strong> </strong> <span></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert fade show w-100 mb-1" role="alert" id="info_box">
+                <span></span>
             </div>
             <form id="form">
                 <div class="form-wrapper">
@@ -74,7 +73,6 @@
                     else{
                         $("#info_box").show()
                         $("#info_box").addClass("alert-danger")
-                        $("#info_box > strong").text("Error")
                         $("#info_box > span").text(res.message)
                     }
                 })
