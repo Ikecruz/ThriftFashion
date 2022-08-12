@@ -165,7 +165,7 @@ body {
   font-weight: 400;
 }
 
-.container {
+.dashboard_container {
   width: 100%;
   background-color: white;
   min-height: 100vh;
@@ -195,12 +195,12 @@ body {
   font-weight: 600;
 }
 
-.content {
+.dashbord_content {
   padding: 0px 30px;
   color: rgb(84, 84, 84);
-  padding-top: 30px;
+  padding-top: 30px !important;
 }
-.content .page-header {
+.dashbord_content .page-header {
   margin-bottom: 20px;
   font-weight: 500;
 }
@@ -214,12 +214,10 @@ body {
 }
 
 .overview {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: row;
   gap: 20px;
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .overview-card {
@@ -279,7 +277,7 @@ body {
   color: white;
 }
 .income-statistics .income .income-card:nth-child(2) {
-  background: linear-gradient(-45deg, #5555FF, #9787FF);
+  background: linear-gradient(-45deg, #5555ff, #9787ff);
   color: white;
 }
 
@@ -307,11 +305,13 @@ body {
   padding: 20px;
   margin-top: 20px;
   border-radius: 5px;
+  overflow: auto;
 }
 .recent-users table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  background-color: white;
 }
 .recent-users table thead tr {
   border-bottom: 1px solid gainsboro;
@@ -391,6 +391,7 @@ body {
   padding: 20px;
   margin-top: 20px;
   border-radius: 5px;
+  overflow: auto;
 }
 .products-table .product-filter {
   display: flex;
@@ -496,6 +497,9 @@ body {
   margin-top: 20px;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.075);
 }
+.upload-product-form .input-fields {
+  width: 70%;
+}
 .upload-product-form .input-fields .form-content {
   margin-bottom: 20px;
 }
@@ -505,9 +509,11 @@ body {
   margin: 0 !important;
 }
 .upload-product-form .input-fields .form-content input,
-.upload-product-form .input-fields .form-content textarea {
+.upload-product-form .input-fields .form-content textarea,
+.upload-product-form .input-fields .form-content select {
   border: 1px solid gainsboro;
-  width: 400px;
+  width: 100%;
+  min-width: 0;
   max-width: 400px;
   padding: 6px;
   font-size: 16px;
@@ -525,6 +531,7 @@ body {
   border-radius: 5px;
   color: white;
   font-size: 16px;
+  max-width: 400px;
 }
 .upload-product-form .upload-img-container {
   cursor: pointer;
@@ -581,6 +588,9 @@ body {
   -o-object-fit: cover;
      object-fit: cover;
 }
+.product .product-descriptions {
+  width: 70%;
+}
 .product .product-descriptions .product-content {
   margin-bottom: 20px;
 }
@@ -590,9 +600,10 @@ body {
   margin: 0 !important;
 }
 .product .product-descriptions .product-content input,
-.product .product-descriptions .product-content textarea {
+.product .product-descriptions .product-content textarea,
+.product .product-descriptions .product-content select {
   border: 1px solid gainsboro;
-  width: 400px;
+  width: 100%;
   max-width: 400px;
   padding: 6px;
   font-size: 16px;
@@ -603,6 +614,7 @@ body {
   max-height: 150px;
 }
 .product .product-descriptions .product-content .form-btn {
+  max-width: 400px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -732,4 +744,182 @@ body {
 }
 .user-container .account-nav {
   margin-top: 30px;
+}
+
+@media screen and (max-width: 1250px) {
+  .sidebar-container {
+    min-width: 100px;
+    max-width: 100px;
+    overflow: hidden;
+  }
+  .sidebar-container menu ul li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .sidebar-container menu ul li a h4 {
+    font-size: 12px;
+  }
+  .dashbord_content {
+    padding: 0px 20px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .App {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .sidebar-container {
+    position: static;
+    min-width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    height: 50px;
+    overflow: visible;
+    z-index: 10;
+  }
+  .sidebar-container .logo {
+    display: none;
+  }
+  .sidebar-container menu {
+    height: 100%;
+    width: 300px;
+    padding-top: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #2d67e4;
+    transform: translateX(-100%);
+  }
+  .sidebar-container menu ul li a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+  }
+  .sidebar-container menu ul li a h4 {
+    font-size: 14px;
+  }
+  .dashbord_content {
+    padding: 0px 20px;
+  }
+  .overview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .overview .overview-card:nth-child(3) {
+    grid-column: 1/span 2;
+  }
+  .income-statistics {
+    width: 100%;
+    gap: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+  }
+  .income-statistics .income {
+    width: 100%;
+    flex-direction: row;
+  }
+  .income-statistics .chart {
+    width: 100%;
+  }
+  .upload-product-form .upload-img-container {
+    height: 300px;
+  }
+  .product .product-img {
+    height: 300px;
+  }
+  .settings form {
+    width: 450px;
+  }
+  .settings form .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 771px) {
+  .upload-product-form {
+    flex-direction: column-reverse;
+    padding: 0px 10%;
+  }
+  .upload-product-form .upload-img-container {
+    width: 100%;
+  }
+  .upload-product-form .input-fields {
+    width: 100%;
+  }
+  .upload-product-form .input-fields input,
+.upload-product-form .input-fields textarea,
+.upload-product-form .input-fields button {
+    max-width: 100% !important;
+  }
+  .product {
+    flex-direction: column;
+    padding: 0px 10%;
+  }
+  .product .product-img {
+    margin: auto;
+    height: 400px;
+    min-width: 0;
+  }
+  .product .product-descriptions {
+    width: 100%;
+  }
+  .product .product-descriptions input,
+.product .product-descriptions select,
+.product .product-descriptions textarea,
+.product .product-descriptions .form-btn {
+    max-width: 100% !important;
+  }
+}
+@media screen and (max-width: 530px) {
+  .dashbord_content {
+    padding: 0px 10px;
+  }
+  .overview {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .overview .overview-card:nth-child(3) {
+    grid-column: 1/span 1;
+  }
+  .overview .overview-card {
+    font-size: 14px;
+  }
+  .overview .overview-card .icon i {
+    font-size: 30px;
+  }
+  .overview .overview-card h1 {
+    font-size: 30px;
+  }
+  .income-statistics .income {
+    flex-direction: column;
+  }
+  .product {
+    flex-direction: column;
+    padding: 0px 10%;
+  }
+  .product .product-img {
+    width: 100%;
+  }
+  .product .product-descriptions {
+    width: 100%;
+  }
+  .product .product-descriptions input,
+.product .product-descriptions select,
+.product .product-descriptions textarea,
+.product .product-descriptions .form-btn {
+    max-width: 100% !important;
+  }
+  .settings form {
+    width: 100%;
+  }
+  .settings form .form-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }/*# sourceMappingURL=styles.css.map */
