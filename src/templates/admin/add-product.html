@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link rel="stylesheet" href="../../styles/styles.css" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='stylesheet/admin.css')}}"
+    />
+  </head>
+  <body>
+    <div class="App">
+      <div class="sidebar-container">
+        <div class="logo">
+          <a href="/admin">
+            <img src="../../img/default.png" alt="" />
+          </a>
+        </div>
+        <menu>
+          <ul>
+            <li>
+              <a href="/admin">
+                <i class="material-symbols-outlined"> home_app_logo </i>
+                <h4>Dashboard</h4>
+              </a>
+            </li>
+            <li>
+              <a href="orders">
+                <i class="material-symbols-outlined"> shopping_cart </i>
+                <h4>Orders</h4>
+              </a>
+            </li>
+            <li>
+              <a href="products" class="active">
+                <i class="material-symbols-outlined"> styler </i>
+                <h4>Products</h4>
+              </a>
+            </li>
+            <li>
+              <a href="users">
+                <i class="material-symbols-outlined"> group </i>
+                <h4>Users</h4>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <!-- power_settings_new -->
+            <li>
+              <a href="settings">
+                <i class="material-symbols-outlined"> settings </i>
+                <h4>Settings</h4>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <i class="material-symbols-outlined"> power_settings_new </i>
+                <h4>Logout</h4>
+              </a>
+            </li>
+          </ul>
+        </menu>
+      </div>
+      <div class="container">
+        <div class="top-bar">
+          <div class="welcome-text"><span>Products</span></div>
+        </div>
+        <div class="content">
+          <div
+            class="alert alert-dismissible fade show w-100 mb-1"
+            role="alert"
+            id="info_box"
+          >
+            <strong> </strong> <span></span>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+          <form id="form" class="upload-product-form">
+            <div class="input-fields">
+              <h4>Upload product</h4>
+
+              <div class="form-content">
+                <label for="">Name</label>
+                <input type="text" id="name" />
+              </div>
+              <div class="form-content">
+                <label for="">Quantity</label>
+                <input type="number" id="qty" />
+              </div>
+              <div class="form-content">
+                <label for="">Category</label>
+                <input type="text" id="cat" />
+              </div>
+              <div class="form-content">
+                <label for="">Price</label>
+                <input type="number" id="price" />
+              </div>
+              <div class="form-content">
+                <label for="">Description</label>
+                <textarea name="" id="desc" cols="30" rows="10"></textarea>
+              </div>
+              <div class="form-content"><button>Upload</button></div>
+            </div>
+            <div class="upload-img-container">
+              <img src="" alt="" />
+              <input type="file" id="img" />
+              <div class="upload-img-info">
+                <i class="material-symbols-outlined"> ads_click </i>
+                <p>Click to upload photo</p>
+              </div>
+            </div>
+          </form>
+          <div></div>
+        </div>
+      </div>
+    </div>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(document).ready(() => {
+        $("#info_box").hide();
+        $("#info_box").removeClass("alert-danger");
+        $("#info_box").removeClass("alert-success");
+
+        $("#form").submit((e) => {
+          e.preventDefault();
+
+          let data = {
+            name: $("#name").val(),
+            category: $("#cat").val(),
+            qty: $("#qty").val(),
+            price: $("#price").val(),
+            description: $("#desc").val(),
+            image:$("#img").prop('files')[0],
+          };
+          console.log (data)
+          let formData = new FormData(data);
+          for (var key in data) {
+            form_data.append(key, data[key]);
+          }
+
+          $.ajax({
+            type: "POST",
+            url: "/products/add",
+            data: formData,
+          })
+            .done((res) => {
+              if (res.status === "success") {
+                window.location.replace("/");
+              } else {
+                $("#info_box").show();
+                $("#info_box").addClass("alert-danger");
+                $("#info_box > strong").text("Error");
+                $("#info_box > span").text(res.message);
+              }
+            })
+            .fail((e) => console.log(e));
+        });
+      });
+    </script>
+   
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
