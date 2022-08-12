@@ -2,6 +2,7 @@ from services.user_services import check_password, getUserDetail, updateUserDeta
 from flask import session, redirect, request, render_template, jsonify
 
 def index():
+    print(request.path)
     return render_template("user/index.html")
 
 def profile():
