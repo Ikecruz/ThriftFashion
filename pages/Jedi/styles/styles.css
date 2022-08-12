@@ -115,8 +115,22 @@ body {
   top: 0;
   background-color: #2d67e4;
 }
+.sidebar-container .top-nav-content {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.sidebar-container .top-nav-content .burger {
+  color: white;
+  font-size: 40px;
+  display: none;
+}
 .sidebar-container .logo {
   padding: 0px 30px;
+  width: 150px;
 }
 .sidebar-container .logo a {
   font-size: 25px;
@@ -419,7 +433,7 @@ body {
 }
 .products-table table td,
 .products-table table th {
-  text-align: center;
+  text-align: center !important;
   padding: 10px;
 }
 .products-table table .product-item {
@@ -563,6 +577,10 @@ body {
 .upload-product-form .upload-img-container input {
   opacity: 0;
   z-index: 2;
+}
+
+.product-nav {
+  margin-bottom: 30px !important;
 }
 
 .product {
@@ -780,18 +798,34 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    height: 50px;
-    overflow: visible;
+    height: 60px;
     z-index: 10;
   }
+  .sidebar-container.showBar {
+    overflow: visible;
+  }
+  .sidebar-container.showBar menu {
+    transform: translateX(0%) !important;
+  }
+  .sidebar-container .top-nav-content {
+    z-index: 300;
+  }
+  .sidebar-container .top-nav-content .burger {
+    color: white;
+    font-size: 40px;
+    display: block;
+  }
   .sidebar-container .logo {
-    display: none;
+    overflow: hidden;
+  }
+  .sidebar-container .logo a img {
+    width: 80px;
   }
   .sidebar-container menu {
-    height: 100%;
     width: 300px;
-    padding-top: 50px;
+    padding-top: 100px;
     position: fixed;
+    height: 100vh;
     top: 0;
     left: 0;
     background-color: #2d67e4;
