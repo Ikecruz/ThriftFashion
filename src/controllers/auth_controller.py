@@ -80,7 +80,8 @@ def login():
             return jsonify({ 'status': "error", 'message': msg })
         
         if (login_logic(body)):
-            session['user_email'] = body('email')
+            user_id = login_logic(body)
+            session['key'] = user_id
             return jsonify({'status': "success"})
         else:
             msg = "Login details are incorrect"

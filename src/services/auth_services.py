@@ -136,7 +136,9 @@ def login_logic(body):
     passvalid = sha256_crypt.verify(body('password'), user.password)
 
     if passvalid:
-        return True
+        return user.id
+    else:
+        return False
 
 def changepassword_logic(user_email, user_password):
     user = User.query.filter_by(email=user_email).first()
