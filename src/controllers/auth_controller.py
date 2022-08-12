@@ -1,9 +1,10 @@
 from flask import redirect, request, render_template, session, jsonify
-from services.auth_services import emailExists, register_logic, resendToken, usernameExists, verify_logic
+from services.auth_services import changepassword_logic, emailExists, login_logic, register_logic, resendToken, usernameExists, verify_logic
 
 def index():
     return redirect('/')
     
+
 def register():
     msg = ""
 
@@ -11,7 +12,7 @@ def register():
 
         body = request.form.get
 
-        if (body('email') == "" or body('name') == "" or body('password') == "" or body('username') == "" ):
+        if (body('email') is None or body('name') is None or body('password') is None or body('username') is None ):
             msg = "All fields are required"
             return jsonify({ 'status': "error", 'message': msg })
 
@@ -30,6 +31,7 @@ def register():
 
     return render_template('register.html')
 
+
 def verify():
     if 'temp_email' in session:
         email = session['temp_email']
@@ -37,18 +39,22 @@ def verify():
         if request.method == "POST":
             body = request.form.get
 
-            if (body('vcode') == ""):
+            if (body('vcode') is None):
                 msg = "All fields are required"
-                jsonify({'status': "success", 'message': msg})
+                return jsonify({'status': "error", 'message': msg})
 
             else:
                 if verify_logic(email, body('vcode')):
+                    if request.args.get('changepassword') is not None:
+                        session["changepass-email"] = email
+
                     session.pop("temp-email", None)
                     return jsonify({ 'status': "success", 'message': "verified" })
         else:
             return render_template('verify.html')
     else :
         return redirect("/")
+
 
 def resendOTP():
 
@@ -60,3 +66,64 @@ def resendOTP():
             return jsonify({ 'status': "success"})
 
     return jsonify({ 'status': "error" })
+
+
+def login():
+
+    msg = ""
+
+    if (request.method == "POST"):
+        body = request.form.get
+
+        if (body('email') is None or body('password') is None ):
+            msg = "All fields are required"
+            return jsonify({ 'status': "error", 'message': msg })
+        
+        if (login_logic(body)):
+            session['user_email'] = body('email')
+            return jsonify({'status': "success"})
+        else:
+            msg = "Login details are incorrect"
+            return jsonify({ 'status': "error", 'message': msg })
+    
+    return render_template('login.html')
+
+
+def forgot_password():
+    
+    if request.method == "POST":
+        body = request.form.get
+
+        if (body('email') is None):
+            msg = "Email is required"
+            return jsonify({'status': "error",'message': msg })
+
+        if (resendToken(body('email'))):
+            session['temp_email'] = body('email')
+            return jsonify({'status': "success"})
+        else: 
+            return redirect("/auth/signup")
+
+    return render_template('forgotpassword.html')
+
+
+def changePass():
+    msg = ""
+
+    if "changepass-email" in session:
+        email = session["changepass-email"]
+
+        if request.method == "POST":
+            body = request.form.get
+
+            if (body('password') is None):
+                msg = "Password is required"
+                return jsonify({'status': "error",'message': msg })
+
+            if (changepassword_logic(email, body('password'))):
+                session.pop('changepassword-email', None)
+                return jsonify({'status': "success"})
+        else:
+            return render_template('changepassword.html')
+
+    return redirect("/auth/register")
