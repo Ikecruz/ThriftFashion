@@ -14,11 +14,11 @@ body{
     position: sticky;
     top: 0px;
     left: 0px;
-    border-right: 1px solid rgb(172, 172, 172);
+    border-right: 1px solid gainsboro;
     width: 20%;
     display: flex;
     justify-content: center;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: white;
 }
 .left-container::-webkit-scrollbar{
@@ -141,7 +141,42 @@ body{
 
 .right-container{
     width: 80%;
+    padding: 0px 20px;
 }
+
+.product-card-container {
+    grid-column: 1/6;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .product-card-container .card {
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    border-radius: 10px;
+  }
+
+  .product-card-container .card p{
+    font-size: 16px;
+  }
+
+  .product-card-container .card span{
+    font-size: 16px !important;
+  }
+
+  .product-card-container .card .latest_category_items_card {
+    width: 100%;
+    height: max-content;
+    align-items: center;
+    box-shadow: none;
+    padding: 0;
+  }
+  .product-card-container .card .latest_category_items_card img {
+    /* width: calc(100% - 30px); */
+    width: 100%;
+    border-radius: 10px;
+  }
 
 
 
