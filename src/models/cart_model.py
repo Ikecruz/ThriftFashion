@@ -3,6 +3,7 @@ from itertools import product
 
 from datetime import datetime
 from database.db import db
+from models.product_model import Product
 class Cart (db.Model):
     __tablename__ = 'cart'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
