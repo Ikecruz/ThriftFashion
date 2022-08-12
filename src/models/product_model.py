@@ -12,6 +12,7 @@ class Product (db.Model):
     category = db.Column(db.String(80), nullable=False)
     qty = db.Column(db.Integer(), nullable=False)
     date_added = db.Column(db.DateTime(timezone=True), nullable=False,default=datetime.now)
+    description = db.Column(db.String(60), nullable=False)
 
     def __repr__(self):
         return '<id %r>' % self.id

@@ -17,31 +17,31 @@
     <div class="App">
         <div class="sidebar-container">
             <div class="logo">
-                <a href="index.html">
+                <a href="/admin">
                     <img src="../../img/default.png" alt="" />
                 </a>
             </div>
             <menu>
                 <ul>
-                    <li><a href="./index.html">
+                    <li><a href="/admin">
                             <i class="material-symbols-outlined">
                                 home_app_logo
                             </i>
                             <h4>Dashboard</h4>
                         </a></li>
                     <li>
-                        <a href="orders.html">
+                        <a href="orders">
                             <i class="material-symbols-outlined"> shopping_cart </i>
                             <h4>Orders</h4>
                         </a>
                     </li>
-                    <li><a href="products.html">
+                    <li><a href="products">
                             <i class="material-symbols-outlined">
                                 styler
                             </i>
                             <h4>Products</h4>
                         </a></li>
-                    <li><a href="users.html">
+                    <li><a href="users">
                             <i class="material-symbols-outlined">
                                 group
                             </i>
@@ -50,7 +50,7 @@
                 </ul>
                 <ul>
                     <!-- power_settings_new -->
-                    <li><a href="settings.html" class="active">
+                    <li><a href="settings" class="active">
                             <i class="material-symbols-outlined">
                                 settings
                             </i>
@@ -75,29 +75,34 @@
                     <div class="settings-nav">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="settings.html">General</a>
+                                <a class="nav-link active" aria-current="page" href="#">General</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Security</a>
+                                <a class="nav-link" href="security">Security</a>
                             </li>
                         </ul>
                     </div>
-                    <div class="settings-content">
-                        <h5>Change password</h5>
-                        <form action="">
-                            <div class="form-content">
-                                <label for="">Password</label>
-                            <input type="text">
+                    <div class="setting-content">
+                        <form action="" class="form-details">
+                            <div class="form-grid">
+                                <div class="form-content">
+                                    <label for="">Username</label>
+                                    <input type="text">
+                                </div>
+                                <div class="form-content">
+                                    <label for="">Email</label>
+                                    <input type="text">
+                                </div>
+                                <div class="form-content">
+                                    <label for="">Firstname </label>
+                                    <input type="text">
+                                </div>
+                                <div class="form-content">
+                                    <label for="">Phone number</label>
+                                    <input type="text">
+                                </div>
                             </div>
-                            <div class="form-content">
-                                <label for="">New password</label>
-                            <input type="text">
-                            </div>
-                            <div class="form-content">
-                                <label for="">Confirm password</label>
-                            <input type="text">
-                            </div>
-                            <button>Change</button>
+                            <button>Update</button>
                         </form>
                     </div>
                 </div>

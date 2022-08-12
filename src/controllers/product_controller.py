@@ -3,19 +3,20 @@ from utils.file_util import upload_file
 from services.product_service import add_category, add_product, categoryExists, productExists, update_stock
 from services.email_services import sendEmail
 
-from flask import jsonify, redirect, request, session, url_for
+from flask import jsonify, redirect, render_template, request, session, url_for
 
 
 def index():
-  if request.method == "POST":
-    return redirect ("/")
+    if 'admin' not in session:
+        return redirect('/admin/login')
+    return render_template("admin/products.html")
 
 
 def addProduct():
     if request.method == "POST":
         body = request.form.get
         f = request.files.get
-        if (body("name") is None or body("price") is None or body("qty") is None or body("category") is None or f('image') == None):
+        if (body("name") is None or body("price") is None or body("qty") is None or body("category") is None or f('image') is None or body("description") is None):
             msg = "Fill All fields"
         # elif 'admin' not in session:
         #         return redirect('/admin/login')
