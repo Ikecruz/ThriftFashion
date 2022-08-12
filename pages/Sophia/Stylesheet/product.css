@@ -157,26 +157,7 @@ body{
     border-radius: 10px;
   }
 
-  .product-card-container .card p{
-    font-size: 16px;
-  }
 
-  .product-card-container .card span{
-    font-size: 16px !important;
-  }
-
-  .product-card-container .card .latest_category_items_card {
-    width: 100%;
-    height: max-content;
-    align-items: center;
-    box-shadow: none;
-    padding: 0;
-  }
-  .product-card-container .card .latest_category_items_card img {
-    /* width: calc(100% - 30px); */
-    width: 100%;
-    border-radius: 10px;
-  }
 
 
 

@@ -302,17 +302,6 @@ img {
   height: max-content;
   border-radius: 10px;
 }
-.product-card-container .card .latest_category_items_card {
-  width: 100%;
-  align-items: center;
-  box-shadow: none;
-}
-.product-card-container .card .latest_category_items_card img {
-  width: calc(100% - 30px);
-  margin-left: 15px;
-  margin-right: 15px;
-  border-radius: 10px;
-}
 
 .products-table {
   cursor: pointer;
