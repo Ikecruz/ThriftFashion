@@ -20,11 +20,14 @@
 <body>
     <div class="App">
         <div class="sidebar-container">
-            <div class="logo">
-                <a href="index.html">
+            <div class="top-nav-content">
+                <i class=" burger material-symbols-outlined"> list </i>
+                <div class="logo">
+                  <a href="index.html">
                     <img src="../../img/default.png" alt="" />
-                </a>
-            </div>
+                  </a>
+                </div>
+              </div>
             <menu>
                 <ul>
                     <li>
@@ -74,6 +77,16 @@
                 <div class="welcome-text"><span>Products</span></div>
             </div>
             <div class="dashbord_content">
+                <div class="product-nav">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">All Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="product-category.html">Categories</a>
+                        </li>
+                    </ul>
+                </div>
                 <div>
                     <a href="add-product.html" class="add-product-link">Add product</a>
                 </div>
@@ -163,6 +176,17 @@
         $('#product_table').DataTable();
     });
 </script>
+<script>
+    const burger = document.querySelector(".burger");
+    const sideBar = document.querySelector(".sidebar-container");
+    const body = document.querySelector("body");
+    console.log(burger);
+    burger.addEventListener("click",()=>{
+      sideBar.classList.toggle("showBar")
+      if(sideBar.classList.contains("showBar")) body.style.overflow ="hidden";
+      else  body.style.overflow ="visible";
+    })
+  </script>
 </body>
 
 </html>
