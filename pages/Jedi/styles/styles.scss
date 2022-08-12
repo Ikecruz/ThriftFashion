@@ -27,6 +27,12 @@ body {
   height: 100%;
 }
 
+.form-error{
+  color: crimson;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
 .App {
   @include flexDisplay(flex-start, flex-start, row);
 }
