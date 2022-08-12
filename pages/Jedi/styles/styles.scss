@@ -402,6 +402,7 @@ body {
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.075);
 
   .input-fields {
+    width: 70%;
     .form-content {
       margin-bottom: 20px;
       label {
@@ -412,7 +413,8 @@ body {
       input,
       textarea {
         border: 1px solid gainsboro;
-        width: 400px;
+        width: 100%;
+        min-width: 0;
         max-width: 400px;
         padding: 6px;
         font-size: 16px;
@@ -430,6 +432,7 @@ body {
         border-radius: 5px;
         color: white;
         font-size: 16px;
+        max-width: 400px;
       }
     }
   }
@@ -713,6 +716,29 @@ body {
       width: 100%;
     }
   }
+  .upload-product-form{
+
+      .upload-img-container{
+        height: 300px;
+      }
+  }
+}
+
+@media screen and (max-width: 771px) {
+  .upload-product-form{
+    flex-direction: column-reverse;
+    padding: 0px 10%;
+    .upload-img-container{
+    width: 100%;
+    }
+   .input-fields{
+    width: 100%;
+    input,textarea,button{
+      max-width: 100% !important;
+
+    }
+   }
+}
 }
 
 @media screen and (max-width: 530px) {
