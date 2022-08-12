@@ -92,9 +92,10 @@ body {
             display: inline-block;
             display: block;
             padding: 5px 20px;
-            color: #676c6f;
+            color: #676c6f !important;
             border-radius: 50px;
             position: relative;
+            text-decoration: none !important;
             button {
                 width: 100%;
                 min-width: 100%;
@@ -121,6 +122,9 @@ body {
                 background-color: #2d67e4;
                 button {
                     color: white;
+                    i {
+                        color: white !important;
+                    }
                 }
             }
         }

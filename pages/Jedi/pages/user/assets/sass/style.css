@@ -83,9 +83,10 @@ body {
   display: inline-block;
   display: block;
   padding: 5px 20px;
-  color: #676c6f;
+  color: #676c6f !important;
   border-radius: 50px;
   position: relative;
+  text-decoration: none !important;
 }
 .nav__links a button {
   width: 100%;
@@ -114,6 +115,9 @@ body {
 }
 .nav__links a.active button {
   color: white;
+}
+.nav__links a.active button i {
+  color: white !important;
 }
 
 main {

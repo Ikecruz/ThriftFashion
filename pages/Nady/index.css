@@ -177,6 +177,29 @@
     object-fit: cover;
 }
 
+.whislist_icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(253, 119, 146, 0.371);
+    backdrop-filter: blur(30px);
+}
+
+.whislist_icon i {
+    color: white;
+}
+
+.checked .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 48 !important;
+}
+
 .latest_category_items_card .icons {
     position: absolute;
     z-index: 1;
@@ -214,7 +237,7 @@
 }
 
 .latest_category_items_card .img .icons .remove_from_cart {
-    background-color: black;
+    background-color: crimson;
 }
 
 .latest_category_items_card .img .icons .add_from_cart {
