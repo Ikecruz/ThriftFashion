@@ -1,11 +1,11 @@
-*{
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
     font-family: 'Livvic', sans-serif;
 }
 
-.hero{
+.hero {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +14,7 @@
     /* padding: 250px; */
 }
 
-.hero_text{
+.hero_text {
     /* background-color: blueviolet; */
     display: flex;
     flex-direction: column;
@@ -22,26 +22,25 @@
     text-align: center;
 }
 
-#blue{
+#blue {
     /* color: rgb(245, 232, 220); */
     color: #a0816c;
 }
 
-.hero_text span:nth-child(1){
+.hero_text span:nth-child(1) {
     font-size: 2.7rem;
     font-weight: 600;
     color: rgba(34, 33, 33, 0.829);
 }
 
-
-#hero_text_two{
+#hero_text_two {
     margin-top: 15px;
     font-weight: 400;
     font-size: 1.5rem;
     color: rgba(128, 128, 128, 0.747);
 }
 
-.gender_categories{
+.gender_categories {
     /* background-color: aqua; */
     width: 90%;
     display: flex;
@@ -51,7 +50,7 @@
     margin-top: 60px;
 }
 
-.gender_category_card{
+.gender_category_card {
     width: 45%;
     height: 400px;
     background-color: rgba(44, 46, 46, 0.39);
@@ -70,7 +69,7 @@
     cursor: pointer;
 }
 
-.gender_category_card img{
+.gender_category_card img {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -79,8 +78,7 @@
     filter: brightness(.83);
 }
 
-
-.gender_category_card h1{
+.gender_category_card h1 {
     z-index: 5;
     text-align: center;
     font-size: 2.7rem;
@@ -92,8 +90,7 @@
     align-items: center;
 }
 
-
-.clothes_cards{
+.clothes_cards {
     background-color: rgba(239, 239, 241, 0.349);
     width: 100%;
     margin: auto;
@@ -107,13 +104,13 @@
     /* background-color: antiquewhite; */
 }
 
-.clothes_cards span:nth-child(1){
+.clothes_cards span:nth-child(1) {
     font-size: 2rem;
     font-weight: 500;
     color: rgba(34, 33, 33, 0.829);
 }
 
-.clothes_display{
+.clothes_display {
     /* background-color: aqua; */
     width: 100%;
     display: flex;
@@ -121,23 +118,22 @@
     margin-top: 40px;
 }
 
-.clothes_display_card{
+.clothes_display_card {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-
 }
 
-.clothes_display_card img{
+.clothes_display_card img {
     object-fit: cover;
     width: 24%;
     height: 300px;
 }
 
-.latest_category{
+.latest_category {
     text-align: center;
     width: 100%;
     margin-bottom: 50px;
@@ -146,120 +142,161 @@
     padding: 0px 10px;
 }
 
-.latest_category span:nth-child(1){
+.latest_category span:nth-child(1) {
     font-size: 2rem;
     font-weight: 500;
     color: rgba(34, 33, 33, 0.829);
-
 }
 
-.latest_category_items{
+.latest_category_items {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin-top: 25px;
 }
 
-.latest_category_items_card{
-    width: 26%;
-    height: 450px;
-    box-shadow: 1px 2px 25px #a0816c1c;;
+.latest_category_items_card {
+    width: 100%;
+    height: max-content;
     border-radius: 40px;
     position: relative;
 }
 
-.latest_category_items_card img{
-    width: 90%;
-    height: 300px;
-    margin-top: 20px;
-    border-radius: 30px;
+.latest_category_items_card .img {
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    height: 280px;
 }
 
-.latest_category_item_desc{
+.latest_category_items_card .img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.whislist_icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     display: flex;
-    flex-direction: column;
-    padding: 0px 20px;
-}
-
-.latest_category_item_desc p:nth-child(1){
-    text-align: start;
-    margin-top: 20px;
-    font-size: 1.5rem;
-    color: rgba(56, 55, 55, 0.842);
-    font-weight: 500;
-}
-
-.latest_category_item_desc div:nth-child(2){
-    display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
+    background-color: rgba(253, 119, 146, 0.371);
+    backdrop-filter: blur(30px);
 }
 
-.latest_category_item_desc div:nth-child(2) span:nth-child(1){
-    color: rgba(146, 145, 145, 0.705);
-    font-size: 1.3rem;
+.whislist_icon i {
+    color: white;
 }
 
-.latest_category_item_desc div:nth-child(2) span:nth-child(2){
-    font-weight: 600;
-    font-size: 1.4rem;
+.checked .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 48 !important;
 }
 
+.latest_category_items_card .icons {
+    position: absolute;
+    z-index: 1;
+    bottom: -25px;
+    display: flex;
+    width: 100%;
+    background-color: transparent;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px 20px;
+    gap: 10px;
+}
 
-.bi-bag-heart-fill{
-    background-color: rgb(34, 34, 34);
-    width: 50px;
-    height: 50px;
+.latest_category_items_card .latest_category_item_desc {
+    margin-top: 20px;
+}
+
+.latest_category_items_card .icons i {
+    font-size: 22px;
+    color: white;
+}
+
+.latest_category_items_card .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 48
+}
+
+.latest_category_items_card .img .icons div {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    color: white;
-    position: absolute;
-    right: 40px;
-    top: 300px;
-    font-size: 1.2rem;
     cursor: pointer;
 }
 
-
-@media screen and (max-width: 992px){
-.gender_category_card{
-    width: 90%;
+.latest_category_items_card .img .icons .remove_from_cart {
+    background-color: crimson;
 }
 
-.gender_categories div:nth-child(2){
+.latest_category_items_card .img .icons .add_from_cart {
+    background-color: #2D67E4;
+}
+
+.latest_category_items_card .latest_category_item_desc {
+    padding: 0px 20px;
+}
+
+.latest_category_items_card .latest_category_item_desc h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.latest_category_items_card .latest_category_item_desc .card-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: gray;
+}
+
+.latest_category_items_card .latest_category_item_desc .card-details span {
+    color: black;
+}
+
+@media screen and (max-width: 992px) {
+    .gender_category_card {
+        width: 90%;
+    }
+}
+
+.gender_categories div:nth-child(2) {
     margin-top: 22px;
 }
 
-.clothes_display_card img{
+.clothes_display_card img {
     width: 48%;
     margin-top: 20px;
 }
 
-
-@media screen and (max-width: 500px){
-    .hero_text span:nth-child(1){
+@media screen and (max-width: 500px) {
+    .hero_text span:nth-child(1) {
         font-size: 2rem;
     }
-
-    #hero_text_two{
+    #hero_text_two {
         font-size: 1.2rem;
     }
-
-    .gender_category_card h1{
+    .gender_category_card h1 {
         font-size: 2.3rem;
     }
-
-    .gender_category_card{
+    .gender_category_card {
         height: 300px;
     }
-
-    .clothes_display_card img{
+    .clothes_display_card img {
         width: 90%;
     }
-
-    .clothes_display_card{
+    .clothes_display_card {
         justify-content: center;
     }
 }
