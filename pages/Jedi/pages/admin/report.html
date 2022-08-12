@@ -13,11 +13,14 @@
 <body>
     <div class="App">
         <div class="sidebar-container">
-            <div class="logo">
-                <a href="index.html">
+            <div class="top-nav-content">
+                <i class=" burger material-symbols-outlined"> list </i>
+                <div class="logo">
+                  <a href="index.html">
                     <img src="../../img/default.png" alt="" />
-                  </a>      
+                  </a>
                 </div>
+              </div>
       
                   <menu>
                 <ul>
@@ -64,11 +67,11 @@
                 </ul>
             </menu>
         </div>
-        <div class="container">
+        <div class="dashboard_container">
             <div class="top-bar">
                 <div class="welcome-text"><span>Users</span></div>
             </div>
-            <div class="content">
+            <div class="dashbord_content">
                 <div class="user-container">
                     <div class="users-details">
                         <h4>Kingsley</h4>
@@ -109,7 +112,17 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-
+    <script>
+        const burger = document.querySelector(".burger");
+        const sideBar = document.querySelector(".sidebar-container");
+        const body = document.querySelector("body");
+        console.log(burger);
+        burger.addEventListener("click",()=>{
+          sideBar.classList.toggle("showBar")
+          if(sideBar.classList.contains("showBar")) body.style.overflow ="hidden";
+          else  body.style.overflow ="visible";
+        })
+      </script>
 </body>
 
 </html>

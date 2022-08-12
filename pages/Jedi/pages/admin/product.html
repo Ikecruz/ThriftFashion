@@ -16,11 +16,14 @@
 <body>
     <div class="App">
         <div class="sidebar-container">
-            <div class="logo">
-                <a href="index.html">
+            <div class="top-nav-content">
+                <i class=" burger material-symbols-outlined"> list </i>
+                <div class="logo">
+                  <a href="index.html">
                     <img src="../../img/default.png" alt="" />
-                </a>
-            </div>
+                  </a>
+                </div>
+              </div>
             <menu>
                 <ul>
                     <li>
@@ -65,11 +68,11 @@
                 </ul>
             </menu>
         </div>
-        <div class="container">
+        <div class="dashboard_container">
             <div class="top-bar">
                 <div class="welcome-text"><span>Products</span></div>
             </div>
-            <div class="content">
+            <div class="dashbord_content">
                 <div class="product">
                     <div class="product-img">
                         <img src="../../img/raquel-gambin-kS3YkVtf85U-unsplash.jpg" alt="">
@@ -80,6 +83,19 @@
                             <label for="">Name</label>
                             <input type="text">
                         </div>
+                        <div class="form-content">
+                            <label for="">Ammount</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-content">
+                          <label for="">Category</label>
+                          <select name="" id="">
+                            <option value="men">Men</option>
+                            <option value="women">Women</option>
+                            <option value="kids">Kids</option>
+                          </select>
+                          
+                      </div>
                         <div class="form-content">
                             <label for="">Quantity</label>
                             <input type="number">
@@ -116,6 +132,17 @@
             myInput.focus();
         });
     </script>
+        <script>
+            const burger = document.querySelector(".burger");
+            const sideBar = document.querySelector(".sidebar-container");
+            const body = document.querySelector("body");
+            console.log(burger);
+            burger.addEventListener("click",()=>{
+              sideBar.classList.toggle("showBar")
+              if(sideBar.classList.contains("showBar")) body.style.overflow ="hidden";
+              else  body.style.overflow ="visible";
+            })
+          </script>
 </body>
 
 </html>
