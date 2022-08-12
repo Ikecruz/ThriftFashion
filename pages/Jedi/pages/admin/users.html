@@ -19,11 +19,14 @@
 <body>
     <div class="App">
         <div class="sidebar-container">
-            <div class="logo">
-                <a href="index.html">
+            <div class="top-nav-content">
+                <i class=" burger material-symbols-outlined"> list </i>
+                <div class="logo">
+                  <a href="index.html">
                     <img src="../../img/default.png" alt="" />
-                  </a>      
+                  </a>
                 </div>
+              </div>
       
                   <menu>
                 <ul>
@@ -128,6 +131,17 @@
             $('#users_table').DataTable();
         });
     </script>
+        <script>
+            const burger = document.querySelector(".burger");
+            const sideBar = document.querySelector(".sidebar-container");
+            const body = document.querySelector("body");
+            console.log(burger);
+            burger.addEventListener("click",()=>{
+              sideBar.classList.toggle("showBar")
+              if(sideBar.classList.contains("showBar")) body.style.overflow ="hidden";
+              else  body.style.overflow ="visible";
+            })
+          </script>
 </body>
 
 </html>

@@ -35,6 +35,12 @@ body {
   margin: auto;
 }
 
+.form-error {
+  color: crimson;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
 .shop-info {
   display: flex;
   align-items: center;
