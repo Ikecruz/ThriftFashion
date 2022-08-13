@@ -1,3 +1,4 @@
+from services.user_services import blockuser_logic, unblockuser_logic
 from flask import redirect, request, render_template, session, jsonify
 from services.auth_services import changepassword_logic, emailExists, login_logic, register_logic, resendToken, usernameExists, verify_logic
 
@@ -128,3 +129,26 @@ def changePass():
             return render_template('auth/changepassword.html')
 
     return redirect("/auth/register")
+
+def block():
+    if request.method == "POST":
+        body = request.form.get
+
+        if (body('id') is None):
+            msg = "id is required"
+            return jsonify({'status': "error",'message': msg })
+        else :
+            if blockuser_logic(body ('id')) :
+             return jsonify({'status': "success"})
+        return jsonify({'status': "error"})   
+def unblock():
+    if request.method == "POST":
+        body = request.form.get
+
+        if (body('id') is None):
+            msg = "id is required"
+            return jsonify({'status': "error",'message': msg })
+        else :
+            if unblockuser_logic(body ('id')) :
+             return jsonify({'status': "success"})
+        return jsonify({'status': "error"})           

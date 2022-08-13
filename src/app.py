@@ -7,6 +7,7 @@ from routes.main_bp import mainBlueprint
 from routes.product_bp import productBlueprint
 from routes.admin_bp import adminBlueprint
 from routes.cart_bp import cartBlueprint
+from routes.feedback_bp import feedbackBlueprint
 from flask_mail import Mail
 
 def create_app():
@@ -29,6 +30,7 @@ app.register_blueprint(userBlueprint, url_prefix="/my")
 app.register_blueprint(productBlueprint,url_prefix='/product')
 app.register_blueprint(adminBlueprint,url_prefix='/admin')
 app.register_blueprint (cartBlueprint,url_prefix='/cart')
+app.register_blueprint (feedbackBlueprint,url_prefix='/feedback')
 
 
 migrate = Migrate(app, db)

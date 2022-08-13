@@ -16,10 +16,13 @@
 <body>
   <div class="App">
     <div class="sidebar-container">
-      <div class="logo">
-        <a href="/admin">
-          <img src="../../img/default.png" alt="" />
-        </a>
+      <div class="top-nav-content">
+        <i class=" burger material-symbols-outlined"> list </i>
+        <div class="logo">
+          <a href="index.html">
+            <img src="../../img/default.png" alt="" />
+          </a>
+        </div>
       </div>
       <menu>
         <ul>
@@ -119,11 +122,11 @@
             <div class="income">
                 <div class="income-card">
                   <p>Total income</p>
-                  <h1>₦400M</h1>
+                  <h1>₦{{money}}</h1>
                 </div>
                 <div class="income-card">
                   <p>Today's income</p>
-                  <h1>₦400M</h1>
+                  <h1>₦{{todays_money}}</h1>
                 </div>
             </div>
 
@@ -134,62 +137,48 @@
           <div class="recent-orders">
             <div class="products-table">
               <h5>Recent orders</h5>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Username</th>
-                    <th>Products</th>
-                    <th>Ammount</th>
-                    <th>Qty</th>
-                    <th>Status</th>
-                    <th>Time</th>
-                    <th>More</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>300</td>
-                    <td>Kingsley</td>
-                    <td>
-                      <div class="product-item">
-                        <img src="../../img/raquel-gambin-kS3YkVtf85U-unsplash.jpg" alt="">
-                        <div>
-                          <a href="product">Night gown</a>
-                          <h6> ₦10,000</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      ₦30,000
-                    </td>
-                    <td>
-                      3
-                    </td>
-                    <td>
-                      <span class="status-icon">Pending</span>
-                    </td>
+             <table>
+                           <table>
+                              <thead>
+                                
+                                  <tr>
+                                      <th>User</th>
+                                      <th>Amount</th>
+                                      <th>Quantity</th>
+                                      <th>Status</th>
+                                      <th>Date</th>
+                                  </tr>
+                                  
+                              </thead>
+                              <tbody>
+                                    {% if orders|length>0 %}
+                                 {% for order in orders %}
+                                  <tr>
+                                       <td>
+                                       {{order.user}}
+                                      </td>
+                                      <td>
+                                       {{order.price}}
+                                      </td>
+                                      <td>
+                                        {{order.quantity}}
+                                      </td>
+                                       {% if order.status %}
+                                <td><span class="status-icon active">Success</span></td>
+                                {% endif %}
+                                {% if not order.status %}
+                                <td><span class="status-icon pending ">Blocked</span></td>
+                                {% endif %}
 
-                    <td>_ _</td>
-                    <td>
-                      <div class="dropdown">
-                        <button class=" dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          <span class="material-symbols-outlined">
-                            more_vert
-                          </span>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Action</a></li>
-                          <li><a class="dropdown-item" href="#">Another action</a></li>
-                          <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                      </div>
-
-                    </td>
-                  </tr>
-
-                </tbody>
-              </table>
+                                      
+                                      <td>{{order.date}}</td>
+                                      
+                                  </tr>
+                                   {% endfor %}
+                            {% endif %}
+                              </tbody>
+                          </table>
+                      </table>
 
             </div>
           </div>
@@ -255,7 +244,17 @@
     config
   );
     </script>
-    
+     <script>
+      const burger = document.querySelector(".burger");
+      const sideBar = document.querySelector(".sidebar-container");
+      const body = document.querySelector("body");
+      console.log(burger);
+      burger.addEventListener("click",()=>{
+        sideBar.classList.toggle("showBar")
+        if(sideBar.classList.contains("showBar")) body.style.overflow ="hidden";
+        else  body.style.overflow ="visible";
+      })
+    </script>
 </body>
 {% endblock%}
 </html>

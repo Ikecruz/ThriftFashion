@@ -88,36 +88,46 @@
                         </div>
 
                       <table>
-                          <thead>
-                              <tr>
-                                  <th>Id</th>
-                                  <th>Username</th>
-                                  <th>Ammount</th>
-                                  <th>Qty</th>
-                                  <th>Status</th>
-                                  <th>Time</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <td>300</td>
-                                  <td>Kingsley</td>
+                           <table>
+                              <thead>
+                                
+                                  <tr>
+                                      <th>User</th>
+                                      <th>Amount</th>
+                                      <th>Quantity</th>
+                                      <th>Status</th>
+                                      <th>Date</th>
+                                  </tr>
                                   
-                                  <td>
-                                    ₦30,000
-                                  </td>
-                                  <td>
-                                    3
-                                  </td>
-                                  <td>
-                                   <span class="status-icon pending">Pending</span>
-                                  </td>
-                                  
-                                  <td>_ _</td>
-                                 
-                              </tr>
-                            
-                          </tbody>
+                              </thead>
+                              <tbody>
+                                    {% if orders|length>0 %}
+                                 {% for order in orders %}
+                                  <tr>
+                                       <td>
+                                       {{order.user}}
+                                      </td>
+                                      <td>
+                                       {{order.price}}
+                                      </td>
+                                      <td>
+                                        {{order.quantity}}
+                                      </td>
+                                       {% if order.status %}
+                                <td><span class="status-icon active">Success</span></td>
+                                {% endif %}
+                                {% if not order.status %}
+                                <td><span class="status-icon pending ">Blocked</span></td>
+                                {% endif %}
+
+                                      
+                                      <td>{{order.date}}</td>
+                                      
+                                  </tr>
+                                   {% endfor %}
+                            {% endif %}
+                              </tbody>
+                          </table>
                       </table>
                       
                   </div>

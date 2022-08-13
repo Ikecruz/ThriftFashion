@@ -11,7 +11,8 @@ def getUserDetail(key):
         'username': user.username,
         'email': user.email,
         'name': user.name,
-        'number': user.number
+        'number': user.number,
+        'status':user.status
     }
     
     return data
@@ -85,6 +86,39 @@ def updatepassword_logic(key, password):
     except Exception as e:
         print(e)
         return False
+
+def blockuser_logic (uid) :     
+  user = User.query.get(uid)
+
+  if user is None:
+        print ('empty')
+        return False
+    
+  user.status = False
+
+  try:
+        User.update(user)
+        return True
+  except Exception as e:
+        print(e)
+        return False
+
+
+def unblockuser_logic(uid):
+  user = User.query.get(uid)
+
+  if user is None:
+      print('empty')
+      return False
+
+  user.status = True
+
+  try:
+      User.update(user)
+      return True
+  except Exception as e:
+      print(e)
+      return False
 
 
 

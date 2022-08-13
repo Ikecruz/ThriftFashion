@@ -78,3 +78,4 @@ def wishlist():
     else:
         return redirect("/auth/login")
         
+
