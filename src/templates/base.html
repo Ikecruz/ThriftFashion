@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block head %}{% endblock %}
-    <link rel="stylesheet" href="{{url_for('static', filename='stylesheet/navbar.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='stylesheet/base.css')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Livvic:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
             <div class="menu">
                 <a href="/">Home</a>
                 <a href="/about">About</a>
-                <a href="/contact">Contact Us</a>
+                <a href="/contact-us">Contact Us</a>
             </div>
             <div class="profile">
                 <a href="/search">
@@ -75,8 +75,12 @@
         </div>
     </div>
 
-    <div>{% block content %}{% endblock %}</div>
+    <div>
+        {% block content %}{% endblock %}
+    </div>
 
+    {% block scripts %}
+    {% endblock %}
     <script>
         let navbar = document.querySelector(".responsivenav")
         let overlay = document.querySelector("#overlay")
