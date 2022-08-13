@@ -55,19 +55,7 @@ def product():
 
     return render_template("admin/add-product.html",categories=data)
 def products():
-    data = []
-    for prod in fetchProducts():
-        data.append(
-            {
-                'id': prod.id,
-                'name': prod.name,
-                'price':prod.price,
-                'quantity': prod.qty,
-                'img':prod.img_url,
-                'description': prod.description,
-                'category': prod.category.name,
-            }
-        )
+    data = fetchProducts ()
     if 'admin' not in session:
             return redirect('/admin/login')
     return render_template("admin/products.html",products=data)
