@@ -29,7 +29,7 @@ def register():
                 session['temp_email'] = body('email')
                 return jsonify({ 'status': "success" })
 
-    return render_template('register.html')
+    return render_template('auth/register.html')
 
 
 def verify():
@@ -51,7 +51,7 @@ def verify():
                     session.pop("temp-email", None)
                     return jsonify({ 'status': "success", 'message': "verified" })
         else:
-            return render_template('verify.html')
+            return render_template('auth/verify.html')
     else :
         return redirect("/")
 
@@ -87,7 +87,7 @@ def login():
             msg = "Login details are incorrect"
             return jsonify({ 'status': "error", 'message': msg })
     
-    return render_template('login.html')
+    return render_template('auth/login.html')
 
 
 def forgot_password():
@@ -105,7 +105,7 @@ def forgot_password():
         else: 
             return redirect("/auth/signup")
 
-    return render_template('forgotpassword.html')
+    return render_template('auth/forgotpassword.html')
 
 
 def changePass():
@@ -125,6 +125,6 @@ def changePass():
                 session.pop('changepassword-email', None)
                 return jsonify({'status': "success"})
         else:
-            return render_template('changepassword.html')
+            return render_template('auth/changepassword.html')
 
     return redirect("/auth/register")

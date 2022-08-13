@@ -5,6 +5,10 @@
     font-family: 'Livvic', sans-serif;
 }
 
+a{
+    text-decoration: none !important;
+}
+
 .hero{
     display: flex;
     flex-direction: column;
@@ -12,6 +16,7 @@
     justify-content: center;
     /* background-color: aqua; */
     /* padding: 250px; */
+    padding: 70px 0;
 }
 
 .hero_text{
@@ -35,7 +40,7 @@
 
 
 #hero_text_two{
-    margin-top: 15px;
+    margin-top: 8px;
     font-weight: 400;
     font-size: 1.5rem;
     color: rgba(128, 128, 128, 0.747);

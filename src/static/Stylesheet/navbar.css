@@ -41,24 +41,6 @@ nav{
     transition: 400ms;
     cursor: pointer;
 }
-.search{
-    background-color: white;
-    width: 300px;
-    box-shadow: 0px 0px 20px rgb(227, 227, 227);
-    height: fit-content;
-    padding: 8px 20px;
-    border-radius: 25px;
-    bottom: -30%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.search-input{
-    display: flex;
-    align-items: center;
-    column-gap: 15px;
-    width: 100%;
-}
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -68,28 +50,18 @@ nav{
   color: rgb(80, 80, 80);
   font-size: 20px;
 }
-.search-input input{
-    width: 100%;
-    border: none;
-    outline: none;
-    font-size: 17px;
-}
-.search-input input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration { 
-    display: none; 
-}
-.search-input input::placeholder{
-    font-size: 17px;
-    font-weight: 500;
-    color: rgb(167, 167, 167);
-}
+
 .profile{
     display: flex;
     align-items: center;
-    column-gap: 15px;
+    gap: 20px;
 }
+
+.profile a{
+    display: flex;
+    align-items: center;
+}
+
 .profile span:hover{
     cursor: pointer;
     color: black;
@@ -102,7 +74,7 @@ input[type="search"]::-webkit-search-results-decoration {
   'GRAD' 0,
   'opsz' 48;
   color: rgb(62, 62, 62);
-  font-size: 25px;
+  font-size: 20px;
 }
 .profile button{
     background-color: #2D67E4;
@@ -118,32 +90,33 @@ input[type="search"]::-webkit-search-results-decoration {
     box-shadow: 0px 4px 20px #2d67e479;
     transition: 500ms;
 }
-.profile .search2{
-    display: none;
-}
 .profile .menuicon{
     display: none;
 }
 
-
-
+#overlay{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 89vh;
+    width: 100%;
+    z-index: 10;
+    background: #00000080;
+}
 
 .responsivenav{
-    row-gap: 30px;
     width: 420px;
     height: 90vh;
     font-family: 'Livvic', sans-serif;
     background-color: white;
-    /* display: none; */
-    
-    padding: 50px 50px;
+    display: none;
+    z-index: 2000;
+    padding: 30px 50px;
     position: absolute;
     right: 0px;
     /* top: 70px; */
-    z-index: 20000;
     box-sizing: border-box;
 }
-
 .show .responsivenav{
     display: flex;
 }
@@ -151,7 +124,7 @@ input[type="search"]::-webkit-search-results-decoration {
     width: 100%;
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 50px;
 }
 .responsive_wrapper{
     display: flex;
@@ -170,9 +143,6 @@ input[type="search"]::-webkit-search-results-decoration {
     justify-content: space-between;
     align-items: center;
 }
-.account .accounticon{
-    display: none;
-}
 .menulist{
     display: flex;
     flex-direction: column;
@@ -181,7 +151,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .menulist a{
     color: black;
     text-decoration: none;
-    font-size: 19px;
+    font-size: 17px;
 }
 .profile_wrapper{
     display: flex;
@@ -203,14 +173,25 @@ input[type="search"]::-webkit-search-results-decoration {
     transition: 500ms;
 }
 
-
-
-
-
-
-
-
-
+.account{
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+}
+.account span{
+    font-variation-settings:
+  'FILL' 1,
+  'wght' 900,
+  'GRAD' 0,
+  'opsz' 48;
+  color: rgb(96, 96, 96);
+  font-size: 22px;
+}
+.account span:hover{
+    cursor: pointer;
+    color: black;
+    transition: 500ms;
+}
 
 @media(max-width: 1000px){
     .search{
@@ -235,15 +216,12 @@ input[type="search"]::-webkit-search-results-decoration {
     .profile span{
         display: none;
     }
-    .profile .account{
-        display: block;
-    }
     .profile .search2{
         display: none;
     }
     .profile .menuicon{
         display: block;
-        font-size: 30px;
+        font-size: 25px;
     }
     .profile .menuicon:hover{
         cursor: pointer;
@@ -252,29 +230,16 @@ input[type="search"]::-webkit-search-results-decoration {
 @media(max-width: 500px){
     .responsivenav{
         width: 100vw;
-        padding: 50px 30px;
+        padding: 30px 20px;
     }
-    .profile .account{
-        display: none;
-    }
-    .account .accounticon{
-        display: block;
+    .menulist a{
+        font-size: 16px;
     }
     .account .accounticon{
         text-align: right;
     }
-    .account span:hover{
-        cursor: pointer;
-        color: black;
-        transition: 500ms;
+    .account span{
+        font-size: 22px;
     }
-    .account .material-symbols-outlined {
-      font-variation-settings:
-      'FILL' 1,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 48;
-      color: rgb(62, 62, 62);
-      font-size: 25px;
-    }
+
 }

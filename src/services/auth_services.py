@@ -87,7 +87,7 @@ def register_logic(body):
     
     try:
         User.insert(user)
-        msgBody = f"Hello {body('username')}, In order to complete your registration you'll need to verify your email address. Your token is {generatedToken}"
+        msgBody = f"Hello {body('username')}, In order to complete your registration you'll need to verify your email address /n Your token is {generatedToken} /n If you didn't request this you can ignore this email or let us know /n Thanks ThriftFashion Team"
         sendEmail("Verification Token", body('email'), msgBody)
         return True
     except Exception as e :
@@ -113,8 +113,8 @@ def resendToken(user_email):
     try:
         user.token = generatedToken
         User.update(user)
-        msgBody = f"Hello {user.username}, Your OTP token is {generatedToken}"
-        sendEmail("Verification Token", user_email, msgBody)
+        msgBody = f"Hello {user.username},Please use the verification code below on the ThriftFashion website /n Your OTP token is {generatedToken} /n If you didn't request this you can ignore this email or let us know /n Thanks ThriftFashion Team"
+        sendEmail("Verification Code", user_email, msgBody)
         return True
     except Exception as e:
         print(e)
@@ -141,6 +141,14 @@ def login_logic(body):
         return False
 
 def changepassword_logic(user_email, user_password):
+    """
+    It takes a user's email and password, finds the user in the database, and updates the user's
+    password
+    
+    :param user_email: The email of the user who wants to change their password
+    :param user_password: The new password that the user wants to change to
+    :return: A boolean value.
+    """
     user = User.query.filter_by(email=user_email).first()
 
     if user is None:
