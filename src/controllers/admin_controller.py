@@ -1,7 +1,7 @@
 from controllers.product_controller import getProducts
-from services.cart_services import getAllOrders, getOrders, getTotalOrders
+from services.cart_services import getAllOrders, getOrders, getTotalMoney, getTotalMoneyToday, getTotalOrders
 from services.user_services import getUserDetail, getUsercount, getUsers
-from services.product_service import getCategories, getProductLen
+from services.product_service import fetchProducts, getCategories, getProductLen
 from services.admin_services import admin_login, emailExists, register_admin, usernameExists
 from flask import redirect, jsonify, render_template, request, session
 
@@ -13,7 +13,9 @@ def index():
     prodlen = getProductLen()  
     ordlen= getTotalOrders ()
     orders = getAllOrders()
-    return render_template("admin/index.html",ulen=userlen,plen=prodlen,olen=ordlen,orders=orders)
+    totmon= getTotalMoney ()
+    todmon=getTotalMoneyToday()
+    return render_template("admin/index.html",ulen=userlen,plen=prodlen,olen=ordlen,orders=orders,money=totmon,todays_money=todmon)
 
 
 def  orders():
@@ -54,18 +56,21 @@ def product():
     return render_template("admin/add-product.html",categories=data)
 def products():
     data = []
-    for prod in getProducts():
+    for prod in fetchProducts():
         data.append(
             {
                 'id': prod.id,
                 'name': prod.name,
                 'price':prod.price,
-                'quantity':
+                'quantity': prod.qty,
+                'img':prod.img_url,
+                'description': prod.description,
+                'category': prod.category.name,
             }
         )
-      if 'admin' not in session:
+    if 'admin' not in session:
             return redirect('/admin/login')
-      return render_template("admin/products.html")
+    return render_template("admin/products.html",products=data)
 def register():
     if request.method == "POST":
         msg=''

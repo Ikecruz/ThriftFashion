@@ -16,10 +16,13 @@
 <body>
   <div class="App">
     <div class="sidebar-container">
-      <div class="logo">
-        <a href="/admin">
-          <img src="../../img/default.png" alt="" />
-        </a>
+      <div class="top-nav-content">
+        <i class=" burger material-symbols-outlined"> list </i>
+        <div class="logo">
+          <a href="index.html">
+            <img src="../../img/default.png" alt="" />
+          </a>
+        </div>
       </div>
       <menu>
         <ul>
@@ -119,11 +122,11 @@
             <div class="income">
                 <div class="income-card">
                   <p>Total income</p>
-                  <h1>₦400M</h1>
+                  <h1>₦{{money}}</h1>
                 </div>
                 <div class="income-card">
                   <p>Today's income</p>
-                  <h1>₦400M</h1>
+                  <h1>₦{{todays_money}}</h1>
                 </div>
             </div>
 
@@ -241,7 +244,17 @@
     config
   );
     </script>
-    
+     <script>
+      const burger = document.querySelector(".burger");
+      const sideBar = document.querySelector(".sidebar-container");
+      const body = document.querySelector("body");
+      console.log(burger);
+      burger.addEventListener("click",()=>{
+        sideBar.classList.toggle("showBar")
+        if(sideBar.classList.contains("showBar")) body.style.overflow ="hidden";
+        else  body.style.overflow ="visible";
+      })
+    </script>
 </body>
 {% endblock%}
 </html>

@@ -1,3 +1,4 @@
+from datetime import date
 from sqlalchemy import func
 from models.order_model import Order
 import re
@@ -100,7 +101,16 @@ def checkout(uid):
     except Exception as e:
         print(e)
         return False
-
+def getTotalMoney():
+    total = Order.query.with_entities(func.sum(Order.total).label(
+        'sum')).first().sum
+    return total    
+def getTotalMoneyToday():
+    total = Order.query.filter(
+        func.date(Order.date_added) == date.today()
+    ).with_entities(func.sum(Order.total).label(
+        'sum')).first().sum
+    return total        
 def getTotalOrders ():
      orders = Order.query.all()
 
