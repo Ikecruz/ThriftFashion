@@ -39,14 +39,7 @@ def addProduct():
 
 def getCategory ():
     if request.method == "GET":
-        data = []
-        for cat in getCategories():
-            data.append(
-                {
-                    'id': cat.id,
-                    'name': cat.name
-                }
-            )
+        data = getCategories()
         
         print(data)
         return jsonify({'status':'success','data':data})
@@ -54,22 +47,10 @@ def getCategory ():
 
 def getProducts():
     if request.method == "GET":
-        data = []
-        for prod in fetchProducts():
-            data.append(
-                {
-                    'id': prod.id,
-                    'name': prod.name,
-                    'description':prod.description,
-                    'quantity':prod.qty,
-                    'category':prod.category.name,
-                    'price':prod.price,
-                    'img':prod.img_url
-                }
-            )
-
+        data = fetchProducts()
         print(data)
         return jsonify({'status': 'success', 'data': data})
+        
 def addCategory():
     if request.method == "POST":
         body = request.form.get

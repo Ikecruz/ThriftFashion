@@ -61,29 +61,134 @@
 
         </div>
 
-        <div class="contact_us_form">
+        <form class="contact_us_form" id="form">
 
             <div class="contact_us_inputs">
 
-            <span>Keep in touch</span>
-            <span>You can reach us anytime via  <span id="blue">thriftfashion@gmail.com</span> </span>
+                <span>Keep in touch</span>
+                <span>You can reach us anytime via  <span id="blue">thriftfashion@gmail.com</span> </span>
 
-            <label for="">Name</label>
-            <input type="text" placeholder="Your name">
+                <div class="alert fade show mt-4 mb-0" role="alert" id="info_box">
+                    <p></p>
+                </div>
 
-            <label for="">E-mail</label>
-            <input type="email" placeholder="you@gmail.com">
+                <div class="form_container">
+                    <label for="">Name</label>
+                    <input type="text" placeholder="Your name" id="name">
+                    <p class="mb-0 text-danger" id="name_error"></p>
+                </div>
 
-            <label for="">Phone Number</label>
-            <input type="tel" name="" id="" placeholder="" value="+234">
+                <div class="form_container">
+                    <label for="">E-mail</label>
+                    <input type="email" placeholder="you@gmail.com" id="email">
+                    <p class="mb-0 text-danger" id="email_error"></p>
+                </div>
 
-            <label for="">How can we help?</label>
-            <input type="text">
+                <div class="form_container">
+                    <label for="">Phone Number</label>
+                    <input type="tel" id="number" >
+                    <p class="mb-0 text-danger" id="number_error"></p>
+                </div>
 
-            <button class="submit_btn">Send Message</button> 
+                <div class="form_container">
+                    <label for="">How can we help?</label>
+                    <textarea type="text" id="message"></textarea>
+                    <p class="mb-1 text-danger" id="message_error"></p>
+                </div>
+
+                <button class="submit_btn">Send Message</button> 
             </div>
             
-        </div>
+        </form>
     </div>
 
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready( () => {
+            $("#info_box").hide()
+
+            function validate() {
+
+                let state = true
+
+                if (!/.{3,}$/.test($("#name").val())){
+                    $("#name_error").text("Three or more characters")
+                    $("#name").addClass("error")
+                    state = false;
+                }
+
+                if (!/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test($("#email").val())){
+                    $("#email_error").text("Enter a valid Email")
+                    $("#email").addClass("error")
+                    state = false;
+                }
+
+                if (!/^\+?[1-9][0-9]{7,14}$/.test($("#number").val())){
+                    $("#number_error").text("Enter a valid Contact number")
+                    $("#number").addClass("error")
+                    state = false;
+                }
+
+                if (!/.{4,}$/.test($("#message").val())){
+                    $("#message_error").text("50 or more characters")
+                    $("#message").addClass("error")
+                    state = false;
+                }
+
+                return state
+            }
+
+            $('input').on( 'keypress',(e) => {
+                $("#info_box").hide()
+                let input = e.currentTarget
+                $("#"+input.getAttribute("id")).removeClass("error")
+                $("#"+input.getAttribute("id")+"_error").text('')
+            })
+
+            $('textarea').on( 'keypress',(e) => {
+                $("#info_box").hide()
+                let input = e.currentTarget
+                $("#"+input.getAttribute("id")).removeClass("error")
+                $("#"+input.getAttribute("id")+"_error").text('')
+            })
+
+            $("#form").on("submit", (e) => {
+                e.preventDefault()
+
+                console.log(e)
+
+                validate()
+
+                if (validate()){
+                    $.ajax({
+                        type: "POST",
+                        data: {
+                            name: $("#name").val(),
+                            email: $("#email").val(),
+                            number: $("#number").val(),
+                            message: $("#message").val(),
+                        },
+                        url: "/my/contact"
+                    }).done( (res) => {
+                        if (res.status === "error" ) {
+                            $("#info_box").show()
+                            $("#info_box span").text(res.message)
+                            $("#info_box").removeClass("alert-success")
+                            $("#info_box").addClass("alert-danger")
+                        } else {
+                            $("#info_box").show()
+                            $("#info_box span").text("Password updated successfully")
+                            $("#info_box").removeClass("alert-danger")
+                            $("#info_box").addClass("alert-success")
+                        }
+                    }).fail( (e) => console.log(e) )
+                }
+
+            })
+        })
+    </script>
 {% endblock %}

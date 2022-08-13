@@ -165,6 +165,10 @@ a{
     font-weight: 500;
 }
 
+.form_container{
+    margin-top: 10px;
+}
+
 label{
     margin-top: 20px;
     font-size: 0.9rem;
@@ -173,13 +177,30 @@ label{
 }
 
 input{
-    margin-top: 10px;
     padding: 10px 10px;
     width: 100%;
     border-radius: 7px;
     border: 0.8px solid rgba(162, 161, 161, 0.768);
     text-decoration: none;
     outline: none;
+}
+
+input.error{
+    border-color: crimson;
+}
+
+textarea{
+    display: block;
+    padding: 10px 10px;
+    width: 100%;
+    border-radius: 7px;
+    border: 0.8px solid rgba(162, 161, 161, 0.768);
+    text-decoration: none;
+    outline: none;
+}
+
+textarea.error{
+    border-color: crimson;
 }
 
 .contact_us_form input:nth-child(10){
