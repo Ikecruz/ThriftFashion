@@ -16,6 +16,31 @@ def getUserDetail(key):
     
     return data
 
+
+def getUsers():
+    users = User.query.all()
+
+    if users is None:
+        return False
+    data = []
+    for user in users:
+     data.append({
+         'id':user.id,
+        'username': user.username,
+        'email': user.email,
+        'name': user.name,
+        'number': user.number,
+        'status':user.status
+    })
+
+
+def getUsercount():
+    users = User.query.all()
+
+    if users is None:
+        return 0
+
+    return len (users)
 def updateUserDetail(key, body):
     user = User.query.get(key)
 

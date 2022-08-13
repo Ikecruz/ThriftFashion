@@ -30,7 +30,9 @@ app.register_blueprint(productBlueprint,url_prefix='/product')
 app.register_blueprint(adminBlueprint,url_prefix='/admin')
 app.register_blueprint (cartBlueprint,url_prefix='/cart')
 
+
 migrate = Migrate(app, db)
+db.create_all(app=app)
 mail = Mail(app)
 
 if __name__ == "__main__":

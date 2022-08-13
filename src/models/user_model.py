@@ -13,6 +13,7 @@ class User(db.Model):
     password = db.Column(db.String(80), nullable=False)
     token = db.Column(db.String(80), nullable=False)
     email_verified = db.Column(db.Boolean, nullable=False, default=False)
+    status = db.Column(db.Boolean, nullable=False, default=True)
     join_date = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
 
     def __repr__(self):

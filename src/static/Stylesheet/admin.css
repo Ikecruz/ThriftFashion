@@ -361,6 +361,7 @@ body {
   margin-top: 20px;
   border-radius: 5px;
   overflow: auto;
+  min-height: 100vh;
 }
 
 .recent-users table {

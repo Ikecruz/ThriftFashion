@@ -1,6 +1,6 @@
 import re
 from utils.file_util import upload_file
-from services.product_service import add_category, add_product, categoryExists, getCategories, get_Products, productExists, update_stock
+from services.product_service import add_category, add_product, categoryExists, getCategories, fetchProducts, productExists, update_stock
 from services.email_services import sendEmail
 
 from flask import jsonify, redirect, render_template, request, session, url_for
@@ -55,7 +55,7 @@ def getCategory ():
 def getProducts():
     if request.method == "GET":
         data = []
-        for prod in get_Products():
+        for prod in fetchProducts():
             data.append(
                 {
                     'id': prod.id,
