@@ -16,7 +16,7 @@ def addProduct():
     if request.method == "POST":
         body = request.form.get
         f = request.files.get
-        if (body("name") is None or body("price") is None or body("qty") is None or body("category")  is None or body("description") is None or f('image')is None):
+        if (body("name") is None or body("price") is None or body("qty") is None or body("category") is None or body("description") is None or f('image') is None or body("gender") is None):
             msg = "Fill All fields"
             return jsonify({'status': "error", 'message': msg})
         elif 'admin' not in session:

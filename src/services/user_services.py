@@ -21,7 +21,7 @@ def getUsers():
     users = User.query.all()
 
     if users is None:
-        return False
+        return []
     data = []
     for user in users:
      data.append({
@@ -32,6 +32,7 @@ def getUsers():
         'number': user.number,
         'status':user.status
     })
+    return data
 
 
 def getUsercount():

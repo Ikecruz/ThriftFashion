@@ -13,6 +13,7 @@ class Product (db.Model):
     category = db.relationship("Category")
     qty = db.Column(db.Integer(), nullable=False)
     date_added = db.Column(db.DateTime(timezone=True), nullable=False,default=datetime.now)
+    gender = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(60), nullable=False)
 
     def __repr__(self):
