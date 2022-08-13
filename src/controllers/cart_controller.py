@@ -15,14 +15,14 @@ def addToCart ():
         elif productInCart(body):
                 msg = 'Product already in cart'
                 return jsonify({'status': "error",'msg':msg})
-        elif 'user_email' not in session:
+        elif 'key' not in session:
             msg='Login to continue'
             return jsonify({'status': "error",'message':msg})  
         elif qtyIsInStock(body) == False:
             msg = 'Quantity not in stock'
             return jsonify({'status': "error", 'message': msg})
         else :
-         id=getUserId(session.get('user_email'))
+         id=session['key']
          if addProductToCart(body,id):
                 return  jsonify({'status': "success"})
         return  jsonify({'status': "error"})      
@@ -33,4 +33,7 @@ def removeFromCart():
         if (body("cid") is None):
             msg = 'Fill all fields'
             return jsonify({'status': "error",'message':msg}) 
+        elif 'key' not in session:
+                msg='Login to continue'
+                return jsonify({'status': "error",'message':msg})      
          

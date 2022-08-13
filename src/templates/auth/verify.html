@@ -21,9 +21,8 @@
                 <h1>Verification</h1>
                 <p>Please input the 6 digit verification code sent to you</p>
             </div>
-            <div class="alert alert-dismissible fade show w-100 mb-1" role="alert" id="info_box">
-                <strong> </strong> <span></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert fade show w-100 mb-1" role="alert" id="info_box">
+                <span></span>
             </div>
             <form id="form">
                 <div class="form-wrapper">
@@ -37,20 +36,6 @@
                 <p class="resend_p_tag" id="resend_btn">Didn't recieve email? <span class="underline">Resend</span></p>
             </form>
         </div>
-<<<<<<< HEAD
-        <form action="" method="POST">
-          <div class="form-wrapper">
-            <div class="input-wrapper">
-              <label for="vcode">OTP:</label>
-              <input type="text" name="vcode" id="vcode" />
-              <p id="message"></p>
-            </div>
-          </div>
-          <button>Reset Password</button>
-        </form>
-=======
->>>>>>> bde1a4b7eaae0a3bcb192cd16b22679cbf007cb3
-      </div>
     </div>
     <!-- <i class="bi bi-x"></i> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -75,13 +60,11 @@
                     if (res.status === "success"){
                         $("#info_box").show()
                         $("#info_box").addClass("alert-success")
-                        $("#info_box > strong").text("Success")
                         $("#info_box > span").text("Token sent successfully")
                     }
                     else{
                         $("#info_box").show()
                         $("#info_box").addClass("alert-danger")
-                        $("#info_box > strong").text("Error")
                         $("#info_box > span").text("An error occurred")
                     }
                 })
@@ -130,7 +113,6 @@
 
                         $("#info_box").show()
                         $("#info_box").addClass("alert-success")
-                        $("#info_box > strong").text("Success")
                         $("#info_box > span").html("Email verified...<a href='/auth/login' class='redirect_url'>Log In</a>")
 
                         setTimeout(() => {
@@ -140,7 +122,6 @@
                     else{
                         $("#info_box").show()
                         $("#info_box").addClass("alert-danger")
-                        $("#info_box > strong").text("Error")
                         $("#info_box > span").text("An error occurred...Try again")
                     }
                 })

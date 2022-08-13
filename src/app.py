@@ -25,7 +25,7 @@ app = create_app()
 
 app.register_blueprint(mainBlueprint, url='/')
 app.register_blueprint(authBlueprint, url_prefix='/auth')
-app.register_blueprint(userBlueprint, url_prefix="/user")
+app.register_blueprint(userBlueprint, url_prefix="/my")
 app.register_blueprint(productBlueprint,url_prefix='/product')
 app.register_blueprint(adminBlueprint,url_prefix='/admin')
 app.register_blueprint (cartBlueprint,url_prefix='/cart')
