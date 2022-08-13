@@ -86,6 +86,20 @@ def updatepassword_logic(key, password):
         print(e)
         return False
 
+def blockuser_logic (uid) :     
+  user = User.query.get(uid)
+
+  if user is None:
+        return False
+    
+  user.status = False
+
+  try:
+        User.update(user)
+        return True
+  except Exception as e:
+        print(e)
+        return False
 
 
     

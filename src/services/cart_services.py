@@ -107,3 +107,43 @@ def getTotalOrders ():
      if orders is None:
         return 0
      return len(orders)
+
+
+def getOrders(uid):
+    orders = Order.query.filter_by(user_id=uid).all()
+
+    if orders is None:
+        return []
+    data = []
+    for order in orders:
+     data.append(
+                {
+                    'id': order.id,
+                    'quantity': order.quantity,
+                    'price': order.total,
+                    'date': order.date_added,
+                    'status':order.status,
+                    'user':order.user.name
+                }
+            )
+    return data 
+
+
+def getAllOrders():
+    orders = Order.query.all()
+
+    if orders is None:
+        return []
+    data = []
+    for order in orders:
+     data.append(
+         {
+             'id': order.id,
+             'quantity': order.quantity,
+             'price': order.total,
+             'date': order.date_added,
+             'status': order.status,
+             'user': order.user.name
+         }
+     )
+    return data

@@ -77,7 +77,7 @@
                         <p>{{user.number}}  </p>
                         <ul>
                             <li>
-                                Transaction <h6>1</h6>
+                                Transaction <h6>{{orders|length}}</h6>
                             </li>
                             <!-- <li>
                                 Reports <h6>0</h6>
@@ -88,7 +88,7 @@
                         </ul>
                         <div class="action-btn">
                             <button>Send mail</button>
-                            <button>Block</button>
+                            <button id="block" >Block</button>
                         </div>
                     </div>
                     <div class="account-nav">
@@ -106,39 +106,40 @@
                            
                           <table>
                               <thead>
+                                
                                   <tr>
-                                      <th>Products</th>
-                                      <th>Ammount</th>
-                                      <th>Qty</th>
+
+                                      <th>Amount</th>
+                                      <th>Quantity</th>
                                       <th>Status</th>
-                                      <th>Time</th>
+                                      <th>Date</th>
                                   </tr>
+                                  
                               </thead>
                               <tbody>
+                                    {% if orders|length>0 %}
+                                 {% for order in orders %}
                                   <tr>
-                                      <td>
-                                          <div class="product-item">
-                                          <img src="../../img/raquel-gambin-kS3YkVtf85U-unsplash.jpg" alt="">
-                                         <div>
-                                            <a href="product">Night gown</a>
-                                            <h6> ₦10,000</h6>
-                                         </div>
-                                      </div>
-                                      </td>
-                                      <td>
-                                        ₦30,000
-                                      </td>
-                                      <td>
-                                        3
-                                      </td>
-                                      <td>
-                                       <span class="status-icon pending">Pending</span>
-                                      </td>
                                       
-                                      <td>_ _</td>
+                                      <td>
+                                       {{order.price}}
+                                      </td>
+                                      <td>
+                                        {{order.quantity}}
+                                      </td>
+                                       {% if order.status %}
+                                <td><span class="status-icon active">Success</span></td>
+                                {% endif %}
+                                {% if not order.status %}
+                                <td><span class="status-icon pending ">Blocked</span></td>
+                                {% endif %}
+
+                                      
+                                      <td>{{order.date}}</td>
                                       
                                   </tr>
-                                
+                                   {% endfor %}
+                            {% endif %}
                               </tbody>
                           </table>
                           

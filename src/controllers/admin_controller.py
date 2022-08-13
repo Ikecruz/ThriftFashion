@@ -1,4 +1,5 @@
-from services.cart_services import getTotalOrders
+from controllers.product_controller import getProducts
+from services.cart_services import getAllOrders, getOrders, getTotalOrders
 from services.user_services import getUserDetail, getUsercount, getUsers
 from services.product_service import getCategories, getProductLen
 from services.admin_services import admin_login, emailExists, register_admin, usernameExists
@@ -11,13 +12,15 @@ def index():
     userlen = getUsercount() 
     prodlen = getProductLen()  
     ordlen= getTotalOrders ()
-    return render_template("admin/index.html",ulen=userlen,plen=prodlen,olen=ordlen)
+    orders = getAllOrders()
+    return render_template("admin/index.html",ulen=userlen,plen=prodlen,olen=ordlen,orders=orders)
 
 
 def  orders():
     if 'admin' not in session:
         return redirect('/admin/login')
-    return render_template("admin/orders.html")
+    orders = getAllOrders ()    
+    return render_template("admin/orders.html",orders=orders)
 
 
 def users():
@@ -31,7 +34,8 @@ def user(id):
     if 'admin' not in session:
         return redirect('/admin/login')
     data = getUserDetail(id)
-    return render_template("admin/user.html",user=data)
+    orders= getOrders (id)
+    return render_template("admin/user.html",user=data,orders=orders)
 
 
 def product():
@@ -49,6 +53,16 @@ def product():
 
     return render_template("admin/add-product.html",categories=data)
 def products():
+    data = []
+    for prod in getProducts():
+        data.append(
+            {
+                'id': prod.id,
+                'name': prod.name,
+                'price':prod.price,
+                'quantity':
+            }
+        )
       if 'admin' not in session:
             return redirect('/admin/login')
       return render_template("admin/products.html")
