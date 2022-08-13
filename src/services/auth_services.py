@@ -1,3 +1,4 @@
+import email
 import random
 import string
 from flask import session
@@ -28,6 +29,14 @@ def emailExists(user_email):
     if (userEmail is None):
         return False
     return True
+
+
+def getUserId(user_email):
+    user = User.query.filter_by(email=user_email).first()
+    if (user is None):
+        return False
+    return user.id
+
 
 
 def usernameExists(user_name):

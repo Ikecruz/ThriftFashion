@@ -1,3 +1,4 @@
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -98,28 +99,31 @@
               <div class="form-content">
                 <label for="">Name</label>
                 <input type="text" id="name" />
-                 <p class="form-error">Input field is empty</p>
+                <p class="form-error" id="name_err" >Input field is empty</p>
               </div>
               <div class="form-content">
                 <label for="">Quantity</label>
                 <input type="number" id="qty" />
+                 <p class="form-error" id="qty_err" >Input field is empty</p>
               </div>
-                <div class="form-content">
-                        <label for="">Category</label>
-                        <select name="" id="">
-                          <option value="men">Men</option>
-                          <option value="women">Women</option>
-                          <option value="kids">Kids</option>
-                        </select>
-                        
-                    </div>
+              <div class="form-content">
+                <label for="">Category</label>
+                <select name="" id="cat">
+                  {% for cat in categories %}
+                  <option value="{{cat.name}}" name="{{cat.name}}">{{cat.name}}</option>
+                    {% endfor %}
+                </select>
+                 <p class="form-error" id="cat_err" >Input field is empty</p>
+              </div>
               <div class="form-content">
                 <label for="">Price</label>
                 <input type="number" id="price" />
+                 <p class="form-error" id="price_err" >Input field is empty</p>
               </div>
               <div class="form-content">
                 <label for="">Description</label>
                 <textarea name="" id="desc" cols="30" rows="10"></textarea>
+                 <p class="form-error" id="desc_err" >Input field is empty</p>
               </div>
               <div class="form-content"><button>Upload</button></div>
             </div>
@@ -136,43 +140,94 @@
         </div>
       </div>
     </div>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
     <script>
+         function validate() {
+                let state = true
+                if ($("#name").val() == "") {
+                  $("#name_err").text('Please enter a Product Name')
+                  $("#name_err").show()
+                  state=false
+                }
+                if ($("#cat").val()=="") {
+                  $("#cat_err").text('Please Choose a Category')
+                  $("#cat_err").show()
+                  state=false
+                }
+                 if ($("#desc").val() == "") {
+                  $("#desc_err").text('Please enter a Description')
+                  $("#desc_err").show()
+                  state=false
+                }
+                 if ($("#price").val() == "") {
+                  $("#price_err").text('Please enter a price name')
+                  $("#price_err").show()
+                  state=false
+                }
+                 if ($("#qty").val() == "") {
+                  $("#qty_err").text('Please enter quantity')
+                  $("#qty_err").show()
+                  state=false
+                }
+                return state
+            }
+            
+            function hideAll(){
+             $("#name_err").hide()
+              $("#cat_err").hide()
+               $("#desc_err").hide()
+                $("#qty_err").hide()
+                 $("#price_err").hide()
+            }
+
+
+     
       $(document).ready(() => {
+        hideAll()
         $("#info_box").hide();
         $("#info_box").removeClass("alert-danger");
-        $("#info_box").removeClass("alert-success");
-
+        $("#info_box").removeClass("alert-success")
+     $('input').on( 'keypress',(e) => {
+                let input = e.currentTarget
+                $("#"+input.getAttribute("id")).removeClass("error")
+                $("#"+input.getAttribute("id")+"_error").text('')
+                hideAll ()
+            })
         $("#form").submit((e) => {
           e.preventDefault();
-
-          let data = {
+          if (validate()) {
+             let data = {
             name: $("#name").val(),
             category: $("#cat").val(),
             qty: $("#qty").val(),
             price: $("#price").val(),
             description: $("#desc").val(),
-            image:$("#img").prop('files')[0],
+            image: $("#img").prop("files")[0],
           };
-          console.log (data)
-          let formData = new FormData(data);
+          
+          let formData = new FormData();
           for (var key in data) {
-            form_data.append(key, data[key]);
+            console.log(key);
+            console.log(data[key]);
+            formData.append(key, data[key]);
           }
+          console.log(formData.get('category'));
 
           $.ajax({
             type: "POST",
-            url: "/products/add",
+            url: "/product/add",
             data: formData,
+            processData: false,
+            contentType: false,
           })
             .done((res) => {
               if (res.status === "success") {
-                window.location.replace("/");
+                alert("success")
               } else {
                 $("#info_box").show();
                 $("#info_box").addClass("alert-danger");
@@ -181,10 +236,11 @@
               }
             })
             .fail((e) => console.log(e));
+          }
+         
         });
       });
     </script>
-   
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
@@ -193,3 +249,4 @@
     ></script>
   </body>
 </html>
+{% endblock %}

@@ -1,5 +1,4 @@
-from itertools import product
-from unicodedata import category
+
 from models.product_model import Category, Product
 
 
@@ -10,12 +9,21 @@ def productExists(pname):
     return True
 
 def categoryExists (cname):
+    
     category = Category.query.filter_by(name=cname).first()
+    print (cname)
     if (category is None):
         return False
     return True
 
+def getCategories():
+    categories = Category.query.all()
+    return categories
 
+
+def get_Products():
+    products = Product.query.all()
+    return products
 def add_category (body):
     category = Category(
         name=body('name')
@@ -37,12 +45,14 @@ def update_stock (body):
         print(e)
         return False
 def add_product(body,img):
+    category = Category.query.filter_by(name=body('category')).first()
     product = Product (
         name=body('name'),
-        category=body('category'),
+        category_id=category.id,
         img_url=img,
         price=body('price'),
-        qty=int(body('qty'))
+        qty=int(body('qty')),
+        description=body('description')
     )
     try:
         Product.insert(product)

@@ -9,7 +9,8 @@ class Product (db.Model):
     name = db.Column(db.String(50), nullable=False)
     price = db.Column(db.Numeric())
     img_url = db.Column(db.String(80), nullable=False)
-    category = db.Column(db.String(80), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
+    category = db.relationship("Category")
     qty = db.Column(db.Integer(), nullable=False)
     date_added = db.Column(db.DateTime(timezone=True), nullable=False,default=datetime.now)
     description = db.Column(db.String(60), nullable=False)
@@ -27,7 +28,6 @@ class Category(db.Model):
     __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50), nullable=False)
-
     def __repr__(self):
         return '<id %r>' % self.id
 
