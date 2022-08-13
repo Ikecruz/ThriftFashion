@@ -12,7 +12,7 @@
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <link rel="stylesheet" href="{{url_for('static', filename='stylesheet/admin.css')}}">
 </head>
-
+{% block content %}
 <body>
   <div class="App">
     <div class="sidebar-container">
@@ -81,7 +81,7 @@
                 </div>
 
                 <p>Total products</p>
-                <h1>10</h1>
+                <h1>{{plen}}</h1>
               </div>
             </div>
             <div class="overview-card">
@@ -92,7 +92,7 @@
                   </i>
                 </div>
                 <p>Users</p>
-                <h1>70K</h1>
+                <h1>{{ulen}}</h1>
               </div>
             </div>
             <div class="overview-card">
@@ -105,7 +105,7 @@
                   </i>
                 </div>
                 <p>Orders</p>
-                <h1>70K</h1>
+                <h1>{{olen}}</h1>
               </div>
             </div>
           </div>
@@ -257,5 +257,5 @@
     </script>
     
 </body>
-
+{% endblock%}
 </html>

@@ -1,4 +1,6 @@
-from services.product_service import getCategories
+from services.cart_services import getTotalOrders
+from services.user_services import getUserDetail, getUsercount, getUsers
+from services.product_service import getCategories, getProductLen
 from services.admin_services import admin_login, emailExists, register_admin, usernameExists
 from flask import redirect, jsonify, render_template, request, session
 
@@ -6,7 +8,30 @@ from flask import redirect, jsonify, render_template, request, session
 def index():
     if 'admin' not in session:
         return redirect('/admin/login')
-    return render_template("admin/index.html")
+    userlen = getUsercount() 
+    prodlen = getProductLen()  
+    ordlen= getTotalOrders ()
+    return render_template("admin/index.html",ulen=userlen,plen=prodlen,olen=ordlen)
+
+
+def  orders():
+    if 'admin' not in session:
+        return redirect('/admin/login')
+    return render_template("admin/orders.html")
+
+
+def users():
+    if 'admin' not in session:
+        return redirect('/admin/login')
+        
+    return render_template("admin/users.html",users=getUsers())
+
+
+def user(id):
+    if 'admin' not in session:
+        return redirect('/admin/login')
+    data = getUserDetail(id)
+    return render_template("admin/user.html",user=data)
 
 
 def product():

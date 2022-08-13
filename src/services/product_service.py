@@ -21,9 +21,17 @@ def getCategories():
     return categories
 
 
-def get_Products():
+def fetchProducts():
     products = Product.query.all()
     return products
+
+
+def getProductLen():
+    products = Product.query.all()
+
+    if products is None:
+        return 0
+    return len(products)
 def add_category (body):
     category = Category(
         name=body('name')

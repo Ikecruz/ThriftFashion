@@ -1,3 +1,5 @@
+from sqlalchemy import func
+from models.order_model import Order
 import re
 from models.product_model import Product
 from models.cart_model import Cart
@@ -50,3 +52,58 @@ def updateProductInCart(body, userId):
     except Exception as e:
         print(e)
         return False
+
+
+def deleteProductInCart(body, userId):
+    product = Product.query.filter_by(id=body('pid')).first()
+    cart = Cart.query.filter_by(product_id=body('pid'), user_id=userId).first()
+    qty = cart.quantity
+    product.qty += qty
+    try:
+        Cart.delete(cart)
+        Product.update(product)
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+
+def cartIdExist(cid):
+    cart = Cart.query.filter_by(id=cid).first()
+    if cart is None:
+      return False
+    return True  
+
+
+def cartIdIsNotEmpty(uid):
+    cart = Cart.query.filter_by(user_id=uid).all()
+    if cart is None:
+      return False
+    return True
+def checkout(uid):
+    cart = Cart.query.filter_by(user_id=uid).all()
+    # pdlen=len (cart)
+    total = Cart.query.with_entities(func.sum(Cart.price).label(
+        'sum')).filter_by(user_id=uid).first().sum
+    qty = Cart.query.with_entities(
+        func.sum(Cart.quantity).label('sum')).filter_by(user_id=uid).first().sum
+    order = Order (
+        user_id=uid,
+        quantity=qty,
+        total=total,
+    )    
+    try:
+        Order.insert (order)
+        for item in cart :
+            Cart.delete(item)
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+def getTotalOrders ():
+     orders = Order.query.all()
+
+     if orders is None:
+        return 0
+     return len(orders)

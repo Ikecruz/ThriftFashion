@@ -26,5 +26,8 @@ class Cart (db.Model):
     def update(self):
         db.session.merge(self)
         db.session.commit()
+    def delete (self):
+        db.session.delete(self)
+        db.session.commit()
     
 
