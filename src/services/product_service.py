@@ -18,12 +18,39 @@ def categoryExists (cname):
 
 def getCategories():
     categories = Category.query.all()
+    data = []
+
+    for cat in categories:
+        print(cat.name)
+        data.append(
+            {
+                'id': cat.id,
+                'name': cat.name
+            }
+        )
+
     return categories
 
 
 def fetchProducts():
     products = Product.query.all()
-    return products
+    data = []
+
+    for prod in products:
+        data.append(
+            {
+                'id': prod.id,
+                'name': prod.name,
+                'description':prod.description,
+                'quantity':prod.qty,
+                'category':prod.category.name,
+                'price':prod.price,
+                'img':prod.img_url,
+                'gender': prod.gender
+            }
+        )
+
+    return data
 
 
 def getProductLen():
@@ -32,6 +59,7 @@ def getProductLen():
     if products is None:
         return 0
     return len(products)
+
 def add_category (body):
     category = Category(
         name=body('name')
@@ -52,6 +80,7 @@ def update_stock (body):
     except Exception as e:
         print(e)
         return False
+
 def add_product(body,img):
     category = Category.query.filter_by(name=body('category')).first()
     product = Product (
@@ -60,7 +89,8 @@ def add_product(body,img):
         img_url=img,
         price=body('price'),
         qty=int(body('qty')),
-        description=body('description')
+        description=body('description'),
+        gender=body('gender')
     )
     try:
         Product.insert(product)
@@ -69,3 +99,66 @@ def add_product(body,img):
         print(e)
         return False
  
+def fetchProductsByCategory(cat_id):
+    products = Product.query.filter_by(category_id=cat_id).all()
+    data = []
+
+    for prod in products:
+        data.append(
+            {
+                'id': prod.id,
+                'name': prod.name,
+                'description':prod.description,
+                'quantity':prod.qty,
+                'category':prod.category.name,
+                'price':prod.price,
+                'img':prod.img_url,
+                'gender': prod.gender,
+            }
+        )
+
+    return data
+
+def fetchProductsByGender(g):
+    print(g)
+    products = Product.query.filter_by(gender=g).all()
+    data = []
+
+    for prod in products:
+        data.append(
+            {
+                'id': prod.id,
+                'name': prod.name,
+                'description':prod.description,
+                'quantity':prod.qty,
+                'category':prod.category.name,
+                'price':prod.price,
+                'img':prod.img_url,
+                'gender': prod.gender,
+            }
+        )
+
+    return data
+
+def fetchProductsByPriceRange(range):
+    if range == "lowest":
+        products = Product.query.order_by(Product.price).all()
+    else:
+        products = Product.query.order_by(Product.price.desc()).all()
+    data = []
+
+    for prod in products:
+        data.append(
+            {
+                'id': prod.id,
+                'name': prod.name,
+                'description':prod.description,
+                'quantity':prod.qty,
+                'category':prod.category.name,
+                'price':prod.price,
+                'img':prod.img_url,
+                'gender': prod.gender,
+            }
+        )
+
+    return data

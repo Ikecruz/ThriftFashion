@@ -1,5 +1,3 @@
-
-import re
 from services.product_service import productExists
 from services.auth_services import getUserId
 from services.cart_services import addProductToCart, cartIdExist, cartIdIsNotEmpty, checkout, deleteProductInCart, productInCart, qtyIsInStock, updateProductInCart

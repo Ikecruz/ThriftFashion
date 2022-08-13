@@ -116,6 +116,14 @@
                  <p class="form-error" id="cat_err" >Input field is empty</p>
               </div>
               <div class="form-content">
+                <label for="">Gender</label>
+                <select name="" id="gender">
+                  <option value="Men">Men</option>
+                  <option value="Women">Women</option>
+                </select>
+                 <p class="form-error" id="gen_err" >Input field is empty</p>
+              </div>
+              <div class="form-content">
                 <label for="">Price</label>
                 <input type="number" id="price" />
                  <p class="form-error" id="price_err" >Input field is empty</p>
@@ -159,6 +167,11 @@
                   $("#cat_err").show()
                   state=false
                 }
+                if ($("#gender").val()=="") {
+                  $("#gen_err").text('Please Choose a Category')
+                  $("#gen_err").show()
+                  state=false
+                }
                  if ($("#desc").val() == "") {
                   $("#desc_err").text('Please enter a Description')
                   $("#desc_err").show()
@@ -183,6 +196,7 @@
                $("#desc_err").hide()
                 $("#qty_err").hide()
                  $("#price_err").hide()
+                 $("#gen_err").hide()
             }
 
 
@@ -204,10 +218,12 @@
              let data = {
             name: $("#name").val(),
             category: $("#cat").val(),
+            gender: $("#gender").val(),
             qty: $("#qty").val(),
             price: $("#price").val(),
             description: $("#desc").val(),
             image: $("#img").prop("files")[0],
+            
           };
           
           let formData = new FormData();
