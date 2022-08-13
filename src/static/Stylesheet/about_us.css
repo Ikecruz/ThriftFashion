@@ -110,7 +110,7 @@ a{
 
 .team_members{
     /* background-color: aqua; */
-    padding: 20px 20px;
+    padding: 20px 60px;
     margin-top: 30px;
     display: flex;
     justify-content: space-evenly;
@@ -120,7 +120,7 @@ a{
 
 .team_members_card {
     position: relative;
-    width: 28%;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
@@ -142,7 +142,7 @@ a{
     width: 90%;
     left: 5%;
     right: 5%;
-    top: 290px;     
+    bottom: 20px;     
     display: flex;
     flex-direction: column; 
     justify-content: center;

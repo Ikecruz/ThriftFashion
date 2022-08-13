@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block head %}{% endblock %}
     <link rel="stylesheet" href="{{url_for('static', filename='stylesheet/base.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Livvic:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -19,6 +20,7 @@
             <div class="menu">
                 <a href="/">Home</a>
                 <a href="/about">About</a>
+                <a href="/shop">Shop</a>
                 <a href="/contact-us">Contact Us</a>
             </div>
             <div class="profile">
@@ -27,6 +29,18 @@
                         search
                     </span>
                 </a>
+                {% if loggedIn %}
+                <a href="/checkout">
+                    <span class="material-symbols-outlined ">
+                        shopping_cart
+                    </span>
+                </a>
+                <a href="/my/wishlist">
+                    <span class="material-symbols-outlined">
+                        favorite
+                    </span>
+                </a>
+                {% endif %}
                 <a href="{% if loggedIn %}/my/{% else %}/auth/login{% endif %}">
                     <span class="material-symbols-outlined account">
                         account_circle
@@ -49,19 +63,27 @@
     <div class="responsivenav" style="display: none;">
         <div class="responsivenav_wrapper">
             <div class="account">
-                <span class="material-symbols-outlined ">
-                    account_circle
-                </span>
-                <span class="material-symbols-outlined ">
-                    search
-                </span>
-                {% if not loggedIn %}
-                <span class="material-symbols-outlined ">
-                    shopping_cart
-                </span>
-                <span class="material-symbols-outlined">
-                    favorite
-                </span>
+                <a href="/">
+                    <span class="material-symbols-outlined ">
+                        account_circle
+                    </span>
+                </a>
+                <a href="/search">
+                    <span class="material-symbols-outlined ">
+                        search
+                    </span>
+                </a>
+                {% if loggedIn %}
+                <a href="/checkout">
+                    <span class="material-symbols-outlined ">
+                        shopping_cart
+                    </span>
+                </a>
+                <a href="/my/wishlist">
+                    <span class="material-symbols-outlined">
+                        favorite
+                    </span>
+                </a>
                 {% endif %}
             </div>
             <div class="menulist">
@@ -78,6 +100,49 @@
     <div>
         {% block content %}{% endblock %}
     </div>
+
+    <footer>
+        <div class="footer">
+            <div class="mycontainer">
+                <div class="myrow">
+                    <div class="footer-col">
+                        <h4>help</h4>
+                        <ul>
+                            <li><a href="/contact">Contact</a></li>
+                            <li><a href="#">delivery</a></li>
+                            <li><a href="#">Returnes</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>company</h4>
+                        <ul>
+                            <li><a href="/about">About us </a></li>
+                            <li><a href="/about#vision">Our Vision</a></li>
+                            <li><a href="/about#team">Team </a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>legal</h4>
+                        <ul>
+                            <li><a href="#">Terms of service</a></li>
+                            <li><a href="#">Privacy policy</a></li>
+                            <li><a href="#">Cokies notice</a></li>
+                            <li><a href="#">cokies setting</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Follow us</h4>
+                        <ul>
+                            <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
+                            <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                            <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                            <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     {% block scripts %}
     {% endblock %}
