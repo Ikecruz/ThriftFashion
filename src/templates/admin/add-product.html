@@ -263,6 +263,17 @@
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
       crossorigin="anonymous"
     ></script>
+    <script>
+      const burger = document.querySelector(".burger");
+      const sideBar = document.querySelector(".sidebar-container");
+      const body = document.querySelector("body");
+      console.log(burger);
+      burger.addEventListener("click",()=>{
+        sideBar.classList.toggle("showBar")
+        if(sideBar.classList.contains("showBar")) body.style.overflow ="hidden";
+        else  body.style.overflow ="visible";
+      })
+    </script>
   </body>
 </html>
 {% endblock %}
