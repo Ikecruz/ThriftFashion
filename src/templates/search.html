@@ -14,15 +14,15 @@
 {% block content %}
     <div class="search-wrapper">
         <div class="search">
-            <div class="search-input">
+            <form id="form" action="" method="post" class="search-input">
                 <span class="material-symbols-outlined">
                     search
                 </span>
-                <input type="search" name="search" id="search" placeholder="Search...">
+                <input type="search" value="{{value}}" name="search" id="search" placeholder="Search...">
                 <span class="material-symbols-outlined close" onclick="search_clear()">
                     close
                 </span>
-            </div>
+            </form>
         </div>
     </div>
     <div class="wrapper">
@@ -31,12 +31,149 @@
         </div>
     </div>
 
+    {% if products|length > 0 %}
+    <div class="container my-5">
+        <div class="row m-0 g-5">
 
+            {% for prod in products %}
+                <div class="col-sm-6 col-md-4">
+                    <div class="latest_category_items_card">
+                        <div class="img">
+                            <div class="whislist_icon ">
+                                <i class=" material-symbols-outlined">
+                                    favorite
+                                </i>
+                            </div>
+                            <a href="/product/{{ prod.id }}" class="image_container">
+                                <img src="{{url_for('static', filename='products/'+prod.img)}}" alt="">
+                            </a>
+                            <div class="icons">
+                                <!-- <div class="remove_from_cart">
+                                    <i class=" material-symbols-outlined">
+                                        close
+                                    </i>
+                                </div> -->
+                                <div class="add_from_cart" data-id="{{prod.id}}">
+                                    <i class=" material-symbols-outlined">
+                                        local_mall
+                                    </i>
+                                </div>
 
+                            </div>
+                        </div>
+
+                        <div class="latest_category_item_desc">
+                            <a href="/product/{{ prod.id }}">
+                                <h4>{{prod.name}}</h4>
+                            </a>
+                            <div class="card-details">
+                                <p>For {{prod.gender}}</p> <span>${{prod.price}}</span></div>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if products|length < 1 %}
+    <div class="w-100 d-flex justify-content-center align-items-center" style="height: 400px;">
+        <div class="text-center d-flex flex-column align-items-center">
+            <div style="height: 200px; width: 200px" class="empty_img mb-4">
+                <img class="h-100 w-100" src="{{url_for('static', filename='images/empty-info.svg')}}" alt="">
+            </div>
+            <p style="margin-top: -60px;">Products will be displayed here</p>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        let search = document.querySelector("#search")
         function search_clear(){
-            search.value = ""
+            $("#search").val("")   
         }
+
+        $(document).ready( () => {
+            let cartBtn = $(".add_from_cart")
+
+            cartBtn.click( (e) => {
+
+                let id = $(e.currentTarget).attr('data-id')
+
+                $.ajax({
+                    type: 'POST',
+                    data: {pid: id, qty: 1},
+                    url: "/cart/add"
+                })
+                .done((res) => {
+                    if (res.status === "success"){
+                        Swal.fire({
+                            title: 'Success',
+                            text: "Product added to cart successfully",
+                            icon: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload()
+                                return
+                            }
+                            
+                        })
+                    }
+                    
+                    if (res.status === "error"){
+                        if (res.message === "Product already in cart"){
+                            Swal.fire({
+                                title: 'Sorry',
+                                text: res.message,
+                                icon: 'warning',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Modify in cart'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.replace("/checkout")
+                                    return
+                                }
+                            })
+                        }
+
+                        if (res.message === "Login to continue"){
+                            Swal.fire({
+                                title: 'Sorry',
+                                text: res.message,
+                                icon: 'warning',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Login'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.replace("/auth/login")
+                                    return
+                                }
+                            })
+                        }
+
+                        if (res.message === "Quantity not in stock"){
+                            Swal.fire({
+                                title: 'Sorry',
+                                text: res.message,
+                                icon: 'warning',
+                                showCancelButton: true,
+                                cancelButtonText: 'Okay',
+                            })
+                        }
+                    }
+                })
+            })
+        })
     </script>
 {% endblock %}

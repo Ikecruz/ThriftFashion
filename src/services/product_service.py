@@ -202,3 +202,25 @@ def getProductById(id):
     }
 
     return data
+
+def getProductBySearch(term):
+    products = Product.query.filter(Product.name.ilike({'%' + term + "%"})).all()
+    
+    data = []
+
+    for prod in products:
+        data.append(
+        {
+            
+            'id': prod.id,
+            'name': prod.name,
+            'description':prod.description,
+            'quantity':prod.qty,
+            'category':prod.category.name,
+            'price':prod.price,
+            'img':prod.img_url,
+            'gender': prod.gender,
+        }
+        )
+
+    return data

@@ -1,5 +1,6 @@
 from flask import render_template, session, request, redirect
-from services.product_service import fetchProducts, fetchProductsByCategory, fetchProductsByGender, fetchProductsByPriceRange, getCategories, getLatestProducts, getProductById
+from .admin_controller import product
+from services.product_service import fetchProducts, fetchProductsByCategory, fetchProductsByGender, fetchProductsByPriceRange, getCategories, getLatestProducts, getProductById, getProductBySearch
 
 def index():
     products= fetchProducts()
@@ -66,8 +67,18 @@ def singleProduct(id):
     return render_template("productdetails.html", loggedIn=loggedIn, product=product)
 
 def search():
+    value = ""
     loggedIn = False
+
     if "key" in session:
         loggedIn = True
+    products = []
 
-    return render_template("search.html", loggedIn=loggedIn)
+    if request.method =='POST':
+        body = request.form.get
+        products = getProductBySearch(body('search'))
+        value = body('search')
+    
+        print(products)
+
+    return render_template("search.html", loggedIn=loggedIn, products=products, value=value)
