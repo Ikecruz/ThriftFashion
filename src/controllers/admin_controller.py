@@ -28,7 +28,6 @@ def  orders():
 def users():
     if 'admin' not in session:
         return redirect('/admin/login')
-        
     return render_template("admin/users.html",users=getUsers())
 
 
@@ -55,7 +54,7 @@ def product():
 
     return render_template("admin/add-product.html",categories=data)
 def products():
-    data = fetchProducts()
+    data = fetchProducts ()
     if 'admin' not in session:
             return redirect('/admin/login')
     return render_template("admin/products.html",products=data)

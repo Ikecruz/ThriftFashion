@@ -1,3 +1,4 @@
+from services.cart_services import getCart, getCartTotal
 from flask import render_template, session, request, redirect
 from .admin_controller import product
 from services.product_service import fetchProducts, fetchProductsByCategory, fetchProductsByGender, fetchProductsByPriceRange, getCategories, getLatestProducts, getProductById, getProductBySearch
@@ -55,6 +56,15 @@ def products():
     return render_template("product.html", loggedIn=loggedIn, products=products, categories=categories, selectedCategory=selectedCategory, selectedGender=selectedGender, selectedPriceRange=selectedPriceRange )
 
 
+
+def checkoutpage():
+    if 'key' not in session:
+        msg = 'Login to continue'
+        return redirect('/auth/login')
+    id=session['key']    
+    cart=getCart(id)
+    total=getCartTotal (id)
+    return render_template("user/checkout.html",totalprice=total,cartitems=cart)
 def singleProduct(id):
     loggedIn = False
     if "key" in session:
@@ -82,3 +92,12 @@ def search():
         print(products)
 
     return render_template("search.html", loggedIn=loggedIn, products=products, value=value)
+
+def sellToUs():
+    value = ""
+    loggedIn = False
+
+    if "key" in session:
+        loggedIn = True
+
+    return render_template("sellproducts.html", loggedIn=loggedIn)

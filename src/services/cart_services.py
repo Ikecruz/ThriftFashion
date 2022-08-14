@@ -157,3 +157,38 @@ def getAllOrders():
          }
      )
     return data
+
+def getCart(uid):
+    items = Cart.query.filter_by(user_id=uid).all()
+
+    if items is None:
+        return []
+    data = []
+    for item in items:
+     data.append(
+                {
+                    'id': item.id,
+                    'quantity': item.quantity,
+                    'price': item.product.price,
+                    'date': item.date_added,
+                    'name':item.product.name,
+                    'img':item.product.img_url
+                }
+            )
+    return data 
+def getCartTotal(uid):
+    total = Cart.query.with_entities(func.sum(Cart.price).label(
+        'sum')).filter_by(user_id=uid).first().sum
+    if total is None:
+            return 0
+    return int (total)    
+
+def cancel (oid):    
+    order = Order.query.get(oid)
+    order.status=False
+    try:
+        Order.update(order)
+        return True
+    except Exception as e:
+        print(e)
+        return False

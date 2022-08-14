@@ -104,7 +104,7 @@ def forgot_password():
             session['temp_email'] = body('email')
             return jsonify({'status': "success"})
         else: 
-            return redirect("/auth/signup")
+            return redirect("/auth/register")
 
     return render_template('auth/forgotpassword.html')
 
@@ -151,4 +151,8 @@ def unblock():
         else :
             if unblockuser_logic(body ('id')) :
              return jsonify({'status': "success"})
-        return jsonify({'status': "error"})           
+        return jsonify({'status': "error"})
+
+def logout():
+    session.pop('key', None)
+    return redirect("/")

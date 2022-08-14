@@ -1,6 +1,6 @@
 from services.product_service import productExists
 from services.auth_services import getUserId
-from services.cart_services import addProductToCart, cartIdExist, cartIdIsNotEmpty, checkout, deleteProductInCart, productInCart, qtyIsInStock, updateProductInCart
+from services.cart_services import addProductToCart, cancel, cartIdExist, cartIdIsNotEmpty, checkout, deleteProductInCart, productInCart, qtyIsInStock, updateProductInCart
 from flask import jsonify, request, session
 
 
@@ -26,6 +26,20 @@ def addToCart():
         return jsonify({'status': "error"})
     return 'yes'
 
+
+def cancelOrder():
+     if request.method == "POST":
+        body = request.form.get
+        if (body("oid") is None ):
+            msg = 'Fill all fields'
+            return jsonify({'status': "error", 'message':msg})
+        elif 'key' not in session:
+            msg = 'Login to continue'
+            return jsonify({'status': "error", 'message': msg})    
+        else :
+            if cancel(body("oid")):
+                return jsonify({'status': "success"})
+     return jsonify({'status': "error"})
 
 def removeFromCart():
     if request.method == "POST":

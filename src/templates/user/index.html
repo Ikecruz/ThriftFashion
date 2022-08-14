@@ -25,6 +25,9 @@
                                 class="material-symbols-outlined"> details </i>Details</button></a></li>
                 <li><a href="/my/settings" class="{% if request.path == '/my/settings' %}active{% endif %}"><button><i
                                 class="material-symbols-outlined"> vpn_key </i>Change Password</button></a></li>
+                <li><a href="/auth/logout"><button><span class="material-symbols-outlined">
+                    logout
+                    </span>Logout</button></a></li>
             </ul>
         </nav>
         <main>
@@ -40,9 +43,9 @@
                             <span><i class="uil uil-pen"></i></span>
                         </div>
                         <div class="body">
-                            <p>jedidiah Oton</p>
-                            <small>jedidiahbasil@gmail.com</small>
-                            <a href="">Change Password</a>
+                            <p>{{user.name}}</p>
+                            <small>{{user.email}}</small>
+                            <a href="/my/settings">Change Password</a>
                         </div>
                     </div>
 
@@ -54,17 +57,6 @@
                             <p>Your default shipping address:</p>
                             <small>No default shipping address available.</small>
                             <a href="">add default address</a>
-                        </div>
-                    </div>
-
-                    <div class="content">
-                        <div class="heading">
-                            <h3>Account details</h3>
-                        </div>
-                        <div class="body">
-                            <p>jedidiah Oton</p>
-                            <small>jedidiahbasil@gmail.com</small>
-                            <a href="" class="fill"><i class="uil uil-envelope"></i> Suscribe</a>
                         </div>
                     </div>
                 </div>

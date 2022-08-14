@@ -3,7 +3,10 @@ from flask import session, redirect, request, render_template, jsonify
 
 def index():
     if "key" in session:
-        return render_template("user/index.html", loggedIn=True)
+        key = session["key"]
+
+        user = getUserDetail(key)
+        return render_template("user/index.html", loggedIn=True, user=user)
     return redirect("/auth/login")
 
 def profile():
