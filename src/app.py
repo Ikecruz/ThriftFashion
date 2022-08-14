@@ -8,6 +8,7 @@ from routes.product_bp import productBlueprint
 from routes.admin_bp import adminBlueprint
 from routes.cart_bp import cartBlueprint
 from routes.feedback_bp import feedbackBlueprint
+from routes.wishlist_bp import wishBlueprint
 from flask_mail import Mail
 
 def create_app():
@@ -31,10 +32,11 @@ app.register_blueprint(productBlueprint,url_prefix='/product')
 app.register_blueprint(adminBlueprint,url_prefix='/admin')
 app.register_blueprint (cartBlueprint,url_prefix='/cart')
 app.register_blueprint (feedbackBlueprint,url_prefix='/feedback')
+app.register_blueprint(wishBlueprint, url_prefix='/wish')
 
 
 migrate = Migrate(app, db)
-db.create_all(app=app)
+# db.create_all(app=app)
 mail = Mail(app)
 
 if __name__ == "__main__":

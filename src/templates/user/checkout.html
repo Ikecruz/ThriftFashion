@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='stylesheet/checkout.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Livvic:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+{% if cartitems|length < 1 %}
+                <div class="w-100 d-flex justify-content-center align-items-center" style="height: 400px;">
+                    <div class="text-center d-flex flex-column align-items-center">
+                        <div style="height: 200px; width: 200px" class="empty_img mb-4">
+                            <img class="h-100 w-100" src="{{url_for('static', filename='images/empty-info.svg')}}" alt="">
+                        </div>
+                        <p style="margin-top: -60px;">No items available Go to   <a class="btn-href" href="/shop">Shop</a></p>
+                    </div>
+                </div>
+                {% endif %}  
+                     {% if cartitems|length > 0 %}
+                   {% for item in cartitems %}   
+<body>
+   
+    <div class="left-wrapper">
+        <div class="left-container">
+            <div class="summary-wrapper">
+                <h2>Summary Order</h2>
+                <p>Please confirm your item before payment</p>
+            </div>
+            <div class="cart-items-wrapper">
+              
+                <div class="cart-wrapper">
+                    <img src="{{url_for('static',filename="products/"+item.img)}}" alt="">
+                    <div class="item-details">
+                        <div class="item-info">
+                            <h3>{{item.name}}</h3>
+                            <p>{{item.quantity}}</p>
+                        </div>
+                        <div class="item-price">
+                            <!-- <span class="discountprice">$129.00</span> -->
+                            <span class="normalprice">{{item.price}}</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="right-wrapper">
+        <div class="right-container">
+            <div class="summary-wrapper">
+                <h2>Payment Details</h2>
+                <p>Complete your purchase item by providing your payment details order</p>
+            </div>
+            <form action="">
+                <div class="input-wrapper">
+                    <!-- <label for="">Coupon Code:</label>
+                    <input type="text" name="" id=""> -->
+                </div>
+                <div class="total-wrapper">
+                    <!-- <div class="price">
+                        <p>Subtotal</p>
+                        <p>$397.00</p>
+                    </div> -->
+                    <!-- <div class="price">
+                        <p>Discount (20%)</p>
+                        <p>$39.00</p>
+                    </div> -->
+                    <div class="price">
+                        <p>Total</p>
+                        <p>${{totalprice}}</p>
+                    </div>
+                </div>
+                <button id="pay">Pay ${{totalprice}}</button>
+            </form>
+
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+         $(document).ready(() => {
+             $('#pay').on( 'click',(e) => {
+                 e.preventDefault ()
+                $.ajax({
+            type: "POST",
+            url: "/cart/checkout",
+          })
+            .done((res) => {
+              if (res.status === "success") {
+               // alert("success")
+                window.location.reload()
+              } else {
+                  alert (res.message)
+            }}).fail((e) => console.log(e));
+            })
+          })
+    </script>
+</body>
+   {% endfor %}
+                 {% endif %}
+                  
+</html>
