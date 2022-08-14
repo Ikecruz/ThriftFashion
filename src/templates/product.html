@@ -145,7 +145,7 @@
     <script>
         $(document).ready( () => {
             let cartBtn = $(".add_from_cart")
-
+            let wishBtn =$(".add_from_cart")
             cartBtn.click( (e) => {
 
                 let id = $(e.currentTarget).attr('data-id')
@@ -218,6 +218,70 @@
                     }
                 })
             })
+            rtBtn.click( (e) => {
+
+                let id = $(e.currentTarget).attr('data-id')
+
+                $.ajax({
+                    type: 'POST',
+                    data: {pid: id},
+                    url: "/wish/add"
+                })
+                .done((res) => {
+                    if (res.status === "success"){
+                        Swal.fire({
+                            title: 'Success',
+                            text: "Product added to Wishlist successfully",
+                            icon: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload()
+                                return
+                            }
+                            
+                        })
+                    }
+                    
+                    if (res.status === "error"){
+                        if (res.message === "Product already in wishlist"){
+                            Swal.fire({
+                                title: 'Sorry',
+                                text: res.message,
+                                icon: 'warning',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Modify in cart'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.replace("/checkout")
+                                    return
+                                }
+                            })
+                        }
+
+                        if (res.message === "Login to continue"){
+                            Swal.fire({
+                                title: 'Sorry',
+                                text: res.message,
+                                icon: 'warning',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Login'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.replace("/auth/login")
+                                    return
+                                }
+                            })
+                        }
+
+                    }
+                })
+            })
+      
         })
     </script>
 {% endblock %}
