@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 from services.cart_services import getCart, getCartTotal
-from flask import redirect, render_template, session, request
-
-from services.product_service import fetchProducts, fetchProductsByCategory, fetchProductsByGender, fetchProductsByPriceRange, getCategories
-=======
 from flask import render_template, session, request, redirect
 from services.product_service import fetchProducts, fetchProductsByCategory, fetchProductsByGender, fetchProductsByPriceRange, getCategories, getLatestProducts, getProductById
->>>>>>> d762d6166ac848cc2de642d27f92e3ca8f38e413
 
 def index():
     products= fetchProducts()
