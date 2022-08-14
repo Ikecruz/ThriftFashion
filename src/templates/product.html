@@ -38,11 +38,13 @@
                         </div>
                         <div class="col-md-4">
                             <select name="category" class="form-select" onchange="this.form.submit()">
+                                {{ selectedCategory }}
                                 {% if selectedCategory == "" %}
                                     <option value="" selected>--Select Category--</option>
                                 {% else %}
                                     <option>--Select Category--</option>
                                 {% endif %}
+
                                 {% for cat in categories %}
                                     {% if selectedCategory == cat.id %}
                                         <option value="{{cat.id}}" selected>{{cat.name}}</option>
@@ -91,7 +93,9 @@
                                         favorite
                                     </i>
                                 </div>
-                                <img src="{{url_for('static', filename='products/'+prod.img)}}" alt="">
+                                <a href="/product/{{ prod.id }}" class="image_container">
+                                    <img src="{{url_for('static', filename='products/'+prod.img)}}" alt="">
+                                </a>
                                 <div class="icons">
                                     <!-- <div class="remove_from_cart">
                                         <i class=" material-symbols-outlined">
@@ -108,7 +112,9 @@
                             </div>
     
                             <div class="latest_category_item_desc">
-                                <h4>{{prod.name}}</h4>
+                                <a href="/product/{{ prod.id }}">
+                                    <h4>{{prod.name}}</h4>
+                                </a>
                                 <div class="card-details">
                                     <p>For {{prod.gender}}</p> <span>${{prod.price}}</span></div>
                             </div>
@@ -140,16 +146,76 @@
         $(document).ready( () => {
             let cartBtn = $(".add_from_cart")
 
-            cartBtn.click(() => {
-                let id = $(this).attr('data-id')
+            cartBtn.click( (e) => {
+
+                let id = $(e.currentTarget).attr('data-id')
 
                 $.ajax({
                     type: 'POST',
-                    data: {id: id, qty: 1},
+                    data: {pid: id, qty: 1},
                     url: "/cart/add"
                 })
                 .done((res) => {
+                    if (res.status === "success"){
+                        Swal.fire({
+                            title: 'Success',
+                            text: "Product added to cart successfully",
+                            icon: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload()
+                                return
+                            }
+                            
+                        })
+                    }
                     
+                    if (res.status === "error"){
+                        if (res.message === "Product already in cart"){
+                            Swal.fire({
+                                title: 'Sorry',
+                                text: res.message,
+                                icon: 'warning',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Modify in cart'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.replace("/checkout")
+                                    return
+                                }
+                            })
+                        }
+
+                        if (res.message === "Login to continue"){
+                            Swal.fire({
+                                title: 'Sorry',
+                                text: res.message,
+                                icon: 'warning',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Login'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.replace("/auth/login")
+                                    return
+                                }
+                            })
+                        }
+
+                        if (res.message === "Quantity not in stock"){
+                            Swal.fire({
+                                title: 'Sorry',
+                                text: res.message,
+                                icon: 'warning',
+                                showCancelButton: true,
+                                cancelButtonText: 'Okay',
+                            })
+                        }
+                    }
                 })
             })
         })

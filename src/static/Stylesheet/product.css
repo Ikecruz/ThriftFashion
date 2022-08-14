@@ -325,6 +325,10 @@ a{
     font-weight: 500;
 }
 
+.latest_category_item_desc a{
+    color: #333333;
+}
+
 .latest_category_items_card .latest_category_item_desc .card-details {
     display: flex;
     justify-content: space-between;

@@ -2,19 +2,21 @@
     margin: 0;
     padding: 0;
 }
-body{
+
+a{
+    text-decoration: none !important;
+}
+
+.contain{
     display: flex;
     justify-content: center;
 }
-.container{
+.sop-container{
     width: 90%;
     padding: 50px 0px;
     display: flex;
     column-gap: 100px;
     font-family: 'Livvic', sans-serif;
-}
-.left-container{
-    width: 45%;
 }
 .left-container{
     display: flex;
@@ -62,7 +64,6 @@ body{
 
 
 .right-container{
-    width: 55%;
     display: flex;
     flex-direction: column;
     row-gap: 50px;
