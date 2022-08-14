@@ -10,11 +10,11 @@ def addToCart():
         if (body("pid") is None or body("qty") is None):
             msg = 'Fill all fields'
             return jsonify({'status': "error", 'message': msg})
-        elif productInCart(body):
-            msg = 'Product already in cart'
-            return jsonify({'status': "error", 'msg': msg})
         elif 'key' not in session:
             msg = 'Login to continue'
+            return jsonify({'status': "error", 'message': msg})
+        elif productInCart(body):
+            msg = 'Product already in cart'
             return jsonify({'status': "error", 'message': msg})
         elif qtyIsInStock(body) == False:
             msg = 'Quantity not in stock'

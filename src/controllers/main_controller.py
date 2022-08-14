@@ -1,13 +1,14 @@
-from flask import render_template, session, request
-
-from services.product_service import fetchProducts, fetchProductsByCategory, fetchProductsByGender, fetchProductsByPriceRange, getCategories
+from flask import render_template, session, request, redirect
+from services.product_service import fetchProducts, fetchProductsByCategory, fetchProductsByGender, fetchProductsByPriceRange, getCategories, getLatestProducts, getProductById
 
 def index():
     products= fetchProducts()
+    latestProducts = getLatestProducts()
+
     loggedIn = False
     if "key" in session:
         loggedIn = True
-    return render_template("index.html", loggedIn=loggedIn, products=products)
+    return render_template("index.html", loggedIn=loggedIn, products=products, latestProducts=latestProducts)
 
 def about():
     loggedIn = False
@@ -38,6 +39,9 @@ def products():
         selectedGender = details('gender')
         selectedPriceRange = details('price_range')
 
+        if selectedCategory != "":
+            selectedCategory = int(selectedCategory)
+
         if selectedCategory != "" and selectedCategory != "--Select Category--":
             products = fetchProductsByCategory(selectedCategory)
         elif selectedGender != "" and selectedGender != "--Select Gender--":
@@ -48,3 +52,22 @@ def products():
             products = fetchProducts()
     
     return render_template("product.html", loggedIn=loggedIn, products=products, categories=categories, selectedCategory=selectedCategory, selectedGender=selectedGender, selectedPriceRange=selectedPriceRange )
+
+
+def singleProduct(id):
+    loggedIn = False
+    if "key" in session:
+        loggedIn = True
+    product = getProductById(id)
+
+    if not product:
+        return redirect("/")
+
+    return render_template("productdetails.html", loggedIn=loggedIn, product=product)
+
+def search():
+    loggedIn = False
+    if "key" in session:
+        loggedIn = True
+
+    return render_template("search.html", loggedIn=loggedIn)

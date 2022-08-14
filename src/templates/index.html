@@ -30,13 +30,13 @@
         <div class="gender_categories">
 
             <div class="gender_category_card" id="women">
-                <img src="https://ltsimages.blob.core.windows.net/ltsn2cmslive/upload/Homepage/2022/SO%20womens@2x@2x@2x.jpg" alt="">
+                <img src="{{url_for('static', filename='images/women.png')}}" alt="">
 
                 <h1>SHOP WOMEN</h1> 
             </div>
         
             <div class="gender_category_card" id="men">
-                <img src="https://ltsimages.blob.core.windows.net/ltsn2cmslive/upload/Homepage/2022/SO%20mens.jpg" alt="">
+                <img src="{{url_for('static', filename='images/men.png')}}" alt="">
                 <h1>SHOP MEN</h1> 
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="row g-5 w-100 ms-0">
 
                 {% for prod in products %}
-                    <div class="col-12 col-md-6 col-lg-4">
+                    <div class="col-sm-6 col-md-4">
                         <div class="latest_category_items_card">
                             <div class="img">
                                 <div class="whislist_icon ">
@@ -57,14 +57,16 @@
                                         favorite
                                     </i>
                                 </div>
-                                <img src="https://images2.drct2u.com/repo/CGN/desktop/pages/homepage/standard/2022/04/12/02-images/JAC_HPC_DT_2_Tees.jpg" alt="">
+                                <a href="/product/{{ prod.id }}" class="image_container">
+                                    <img src="{{url_for('static', filename='products/'+prod.img)}}" alt="">
+                                </a>
                                 <div class="icons">
-                                    <div class="remove_from_cart">
+                                    <!-- <div class="remove_from_cart">
                                         <i class=" material-symbols-outlined">
                                             close
                                         </i>
-                                    </div>
-                                    <div class="add_from_cart">
+                                    </div> -->
+                                    <div class="add_from_cart" data-id="{{prod.id}}">
                                         <i class=" material-symbols-outlined">
                                             local_mall
                                         </i>
@@ -74,9 +76,11 @@
                             </div>
     
                             <div class="latest_category_item_desc">
-                                <h4>Cotton shirt</h4>
+                                <a href="/product/{{ prod.id }}">
+                                    <h4>{{prod.name}}</h4>
+                                </a>
                                 <div class="card-details">
-                                    <p>For men</p> <span>$58.00</span></div>
+                                    <p>For {{prod.gender}}</p> <span>${{prod.price}}</span></div>
                             </div>
     
                         </div>
@@ -95,8 +99,8 @@
 
             <div class="row g-5 w-100 ms-0">
 
-                {% for i in range(5) %}
-                    <div class="col-12 col-md-6 col-lg-4">
+                {% for prod in latestProducts %}
+                    <div class="col-sm-6 col-md-4">
                         <div class="latest_category_items_card">
                             <div class="img">
                                 <div class="whislist_icon ">
@@ -104,14 +108,16 @@
                                         favorite
                                     </i>
                                 </div>
-                                <img src="https://images2.drct2u.com/repo/CGN/desktop/pages/homepage/standard/2022/04/12/02-images/JAC_HPC_DT_2_Tees.jpg" alt="">
+                                <a href="/product/{{ prod.id }}" class="image_container">
+                                    <img src="{{url_for('static', filename='products/'+prod.img)}}" alt="">
+                                </a>
                                 <div class="icons">
-                                    <div class="remove_from_cart">
+                                    <!-- <div class="remove_from_cart">
                                         <i class=" material-symbols-outlined">
                                             close
                                         </i>
-                                    </div>
-                                    <div class="add_from_cart">
+                                    </div> -->
+                                    <div class="add_from_cart" data-id="{{prod.id}}">
                                         <i class=" material-symbols-outlined">
                                             local_mall
                                         </i>
@@ -121,9 +127,11 @@
                             </div>
     
                             <div class="latest_category_item_desc">
-                                <h4>Cotton shirt</h4>
+                                <a href="/product/{{ prod.id }}">
+                                    <h4>{{prod.name}}</h4>
+                                </a>
                                 <div class="card-details">
-                                    <p>For men</p> <span>$58.00</span></div>
+                                    <p>For {{prod.gender}}</p> <span>${{prod.price}}</span></div>
                             </div>
     
                         </div>
@@ -137,6 +145,7 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
@@ -149,6 +158,81 @@
             $("#women").click(() => {
                 $("#hidden_input").val("Women")
                 $("#form").submit()
+            })
+
+            let cartBtn = $(".add_from_cart")
+
+            cartBtn.click( (e) => {
+
+                let id = $(e.currentTarget).attr('data-id')
+
+                $.ajax({
+                    type: 'POST',
+                    data: {pid: id, qty: 1},
+                    url: "/cart/add"
+                })
+                .done((res) => {
+                    if (res.status === "success"){
+                        Swal.fire({
+                            title: 'Success',
+                            text: "Product added to cart successfully",
+                            icon: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload()
+                                return
+                            }
+                            
+                        })
+                    }
+                    
+                    if (res.status === "error"){
+                        if (res.message === "Product already in cart"){
+                            Swal.fire({
+                                title: 'Sorry',
+                                text: res.message,
+                                icon: 'warning',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Modify in cart'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.replace("/checkout")
+                                    return
+                                }
+                            })
+                        }
+
+                        if (res.message === "Login to continue"){
+                            Swal.fire({
+                                title: 'Sorry',
+                                text: res.message,
+                                icon: 'warning',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Login'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.replace("/auth/login")
+                                    return
+                                }
+                            })
+                        }
+
+                        if (res.message === "Quantity not in stock"){
+                            Swal.fire({
+                                title: 'Sorry',
+                                text: res.message,
+                                icon: 'warning',
+                                showCancelButton: true,
+                                cancelButtonText: 'Okay',
+                            })
+                        }
+                    }
+                })
             })
 
         })

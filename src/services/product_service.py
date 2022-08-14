@@ -162,3 +162,43 @@ def fetchProductsByPriceRange(range):
         )
 
     return data
+
+def getLatestProducts():
+    products = Product.query.order_by(Product.date_added.desc()).limit(3).all()
+
+    data = []
+
+    for prod in products:
+        data.append(
+            {
+                'id': prod.id,
+                'name': prod.name,
+                'description':prod.description,
+                'quantity':prod.qty,
+                'category':prod.category.name,
+                'price':prod.price,
+                'img':prod.img_url,
+                'gender': prod.gender,
+            }
+        )
+
+    return data
+
+def getProductById(id):
+    product = Product.query.get(id)
+
+    if product is None:
+        return False
+
+    data = {
+        'id': product.id,
+        'name': product.name,
+        'description':product.description,
+        'quantity':product.qty,
+        'category':product.category.name,
+        'price':product.price,
+        'img':product.img_url,
+        'gender': product.gender,
+    }
+
+    return data
